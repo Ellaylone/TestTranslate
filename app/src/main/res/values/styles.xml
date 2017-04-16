@@ -26,7 +26,7 @@
 
     <!-- Category tab border style -->
     <style name="CategoryTabBorder">
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/lightGray</item>
     </style>
 
     <!-- Languages header -->
