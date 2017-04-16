@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        style="@style/LangsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/langs_header_height">
+
+        <ImageButton
+            android:id="@+id/switch_langs"
+            style="@style/LangsHeaderIcon"
+            android:layout_width="@dimen/langs_header_icon_width"
+            android:layout_height="@dimen/langs_header_icon_height" />
+
+        <TextView
+            android:id="@+id/source_lang"
+            style="@style/LangsHeaderLang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/switch_langs"
+            android:layout_toStartOf="@id/switch_langs"
+            tools:text="Английский" />
+
+        <TextView
+            android:id="@+id/target_lang"
+            style="@style/LangsHeaderLang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/switch_langs"
+            android:layout_toRightOf="@id/switch_langs"
+            tools:text="Японский" />
+
+    </RelativeLayout>
+
+</LinearLayout>

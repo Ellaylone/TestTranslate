@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Navigation bar -->
+    <dimen name="nav_bar_border_height">1dp</dimen>
+    <dimen name="nav_bar_tab_height">48dp</dimen>
+    <dimen name="nav_bar_tab_indicator_height">4dp</dimen>
+    <dimen name="nav_bar_tab_max_width">0dp</dimen>
+
+    <!-- Languages header -->
+    <dimen name="langs_header_height">56dp</dimen>
+    <dimen name="langs_header_icon_height">48dp</dimen>
+    <dimen name="langs_header_icon_width">48dp</dimen>
+    <dimen name="langs_header_lang_h_padding">8dp</dimen>
+    <dimen name="langs_header_text_size">18sp</dimen>
+
+</resources>
