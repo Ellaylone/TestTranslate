@@ -14,12 +14,41 @@
         <item name="tabTextAppearance">@style/CategoryTabTextAppearance</item>
         <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
-        <item name="tabMaxWidth">0dp</item>
+        <item name="tabMaxWidth">@dimen/nav_bar_tab_max_width</item>
+        <item name="tabIndicatorHeight">@dimen/nav_bar_tab_indicator_height</item>
+        <item name="android:layout_height">@dimen/nav_bar_tab_height</item>
     </style>
 
     <!-- Text appearance style for a category tab -->
     <style name="CategoryTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <!-- Category tab border style -->
+    <style name="CategoryTabBorder">
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <!-- Languages header -->
+    <style name="LangsHeader">
+        <item name="android:isScrollContainer">false</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="LangsHeaderIcon">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="LangsHeaderLang">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingLeft">@dimen/langs_header_lang_h_padding</item>
+        <item name="android:paddingRight">@dimen/langs_header_lang_h_padding</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/langs_header_text_size</item>
     </style>
 
 </resources>
