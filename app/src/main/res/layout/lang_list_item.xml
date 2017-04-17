@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/lang_list_item_height">
+
+    <TextView
+        android:id="@+id/item_title"
+        style="@style/LangListItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/lang_list_item_h_padding"
+        android:layout_marginStart="@dimen/lang_list_item_h_padding"
+        tools:text="Английский" />
+
+    <ImageView
+        android:id="@+id/item_selected"
+        style="@style/LangListItemCheckmarkIcon"
+        android:layout_width="@dimen/lang_list_icon_width"
+        android:layout_height="@dimen/lang_list_icon_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/lang_list_item_h_padding"
+        android:layout_marginRight="@dimen/lang_list_item_h_padding" />
+
+    <View
+        style="@style/LangListBorder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lang_list_border_height"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

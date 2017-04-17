@@ -20,9 +20,31 @@ import retrofit2.Retrofit;
  */
 
 public class TranslationFragment extends Fragment {
+    TextView sourceLang;
+    TextView targetLang;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_category_translate, container, false);
+
+        sourceLang = (TextView) view.findViewById(R.id.source_lang);
+        targetLang = (TextView) view.findViewById(R.id.target_lang);
+
+        sourceLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("translate", "source");
+            }
+        });
+
+        targetLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("translate", "target");
+            }
+        });
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(TranslateProvider.getENDPOINT())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -33,9 +55,7 @@ public class TranslationFragment extends Fragment {
         langsCall.enqueue(new Callback<GetLangList>() {
             @Override
             public void onResponse(Call<GetLangList> call, Response<GetLangList> response) {
-                TextView sourceLang = (TextView) getActivity().findViewById(R.id.source_lang);
                 sourceLang.setText(response.body().getLangs().get("en"));
-                TextView targetLang = (TextView) getActivity().findViewById(R.id.target_lang);
                 targetLang.setText(response.body().getLangs().get("ru"));
             }
 
@@ -45,6 +65,6 @@ public class TranslationFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_category_translate, container, false);
+        return view;
     }
 }
