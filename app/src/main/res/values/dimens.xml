@@ -14,4 +14,7 @@
     <dimen name="langs_header_lang_h_padding">8dp</dimen>
     <dimen name="langs_header_text_size">18sp</dimen>
 
+    <!-- Translate text area -->
+    <dimen name="source_text_area_margin">8dp</dimen>
+
 </resources>

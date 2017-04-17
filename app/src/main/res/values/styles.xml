@@ -53,4 +53,18 @@
         <item name="android:textSize">@dimen/langs_header_text_size</item>
     </style>
 
+    <!-- Translation text area -->
+    <style name="TranslateTextArea">
+        <item name="android:background">@drawable/border</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:lines">6</item>
+        <item name="android:overScrollMode">always</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:scrollbarStyle">insideInset</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_margin">@dimen/source_text_area_margin</item>
+    </style>
+
 </resources>
