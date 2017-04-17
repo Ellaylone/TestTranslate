@@ -15,7 +15,7 @@
             android:id="@+id/switch_langs"
             style="@style/LangsHeaderIcon"
             android:layout_width="@dimen/langs_header_icon_width"
-            android:layout_height="@dimen/langs_header_icon_height" />
+            android:layout_height="@dimen/langs_header_icon_height"/>
 
         <TextView
             android:id="@+id/source_lang"

@@ -26,7 +26,7 @@
 
     <!-- Category tab border style -->
     <style name="CategoryTabBorder">
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/lightGray</item>
     </style>
 
     <!-- Languages header -->
@@ -40,6 +40,8 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:padding">8dp</item>
         <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:src">@drawable/double_arrow</item>
     </style>
 
     <style name="LangsHeaderLang">
