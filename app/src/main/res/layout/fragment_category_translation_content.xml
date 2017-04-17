@@ -37,4 +37,10 @@
 
     </RelativeLayout>
 
+    <EditText
+        android:id="@+id/source_text_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TranslateTextArea"/>
+
 </LinearLayout>
