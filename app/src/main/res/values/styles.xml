@@ -16,7 +16,6 @@
         <item name="tabMode">fixed</item>
         <item name="tabMaxWidth">@dimen/nav_bar_tab_max_width</item>
         <item name="tabIndicatorHeight">@dimen/nav_bar_tab_indicator_height</item>
-        <item name="android:layout_height">@dimen/nav_bar_tab_height</item>
     </style>
 
     <!-- Text appearance style for a category tab -->
@@ -30,27 +29,38 @@
     </style>
 
     <!-- Languages header -->
-    <style name="LangsHeader">
+    <style name="ToolBar">
         <item name="android:isScrollContainer">false</item>
         <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingLeft">@dimen/tool_bar_h_padding</item>
+        <item name="android:paddingRight">@dimen/tool_bar_h_padding</item>
     </style>
 
-    <style name="LangsHeaderIcon">
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:layout_gravity">center</item>
+    <style name="ToolBarIcon">
         <item name="android:padding">8dp</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ToolBarSwitchIcon" parent="ToolBarIcon">
         <item name="android:src">@drawable/double_arrow</item>
     </style>
 
-    <style name="LangsHeaderLang">
+    <style name="ToolBarBackIcon" parent="ToolBarIcon">
+        <item name="android:src">@drawable/back_arrow</item>
+    </style>
+
+    <style name="ToolBarDeleteIcon" parent="ToolBarIcon">
+        <item name="android:src">@drawable/trash_can</item>
+    </style>
+
+    <style name="ToolBarTextView">
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_vertical|right</item>
-        <item name="android:paddingLeft">@dimen/langs_header_lang_h_padding</item>
-        <item name="android:paddingRight">@dimen/langs_header_lang_h_padding</item>
+        <item name="android:paddingLeft">@dimen/tool_bar_text_view_h_padding</item>
+        <item name="android:paddingRight">@dimen/tool_bar_text_view_h_padding</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">@dimen/langs_header_text_size</item>
+        <item name="android:textSize">@dimen/tool_bar_text_size</item>
     </style>
 
     <!-- Translation text area -->
@@ -64,7 +74,6 @@
         <item name="android:scrollbarStyle">insideInset</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-        <item name="android:layout_margin">@dimen/source_text_area_margin</item>
     </style>
 
 </resources>

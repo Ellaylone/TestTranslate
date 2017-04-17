@@ -7,12 +7,13 @@
     <dimen name="nav_bar_tab_indicator_height">4dp</dimen>
     <dimen name="nav_bar_tab_max_width">0dp</dimen>
 
-    <!-- Languages header -->
-    <dimen name="langs_header_height">56dp</dimen>
-    <dimen name="langs_header_icon_height">48dp</dimen>
-    <dimen name="langs_header_icon_width">48dp</dimen>
-    <dimen name="langs_header_lang_h_padding">8dp</dimen>
-    <dimen name="langs_header_text_size">18sp</dimen>
+    <!-- Toolbar -->
+    <dimen name="tool_bar_height">56dp</dimen>
+    <dimen name="tool_bar_icon_height">48dp</dimen>
+    <dimen name="tool_bar_icon_width">48dp</dimen>
+    <dimen name="tool_bar_h_padding">8dp</dimen>
+    <dimen name="tool_bar_text_view_h_padding">8dp</dimen>
+    <dimen name="tool_bar_text_size">18sp</dimen>
 
     <!-- Translate text area -->
     <dimen name="source_text_area_margin">8dp</dimen>
