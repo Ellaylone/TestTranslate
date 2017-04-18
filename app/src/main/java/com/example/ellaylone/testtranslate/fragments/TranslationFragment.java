@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.ellaylone.testtranslate.GetLangList;
+import com.example.ellaylone.testtranslate.requests.GetLangsRequest;
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.SelectLangActivity;
+import com.example.ellaylone.testtranslate.TranslateApi;
+import com.example.ellaylone.testtranslate.TranslateProvider;
 
 import java.util.Map;
 
@@ -57,7 +64,7 @@ public class TranslationFragment extends Fragment {
                     public void onClick(View v) {
                         Object[] langsA = langs.values().toArray();
                         Intent intent = new Intent(getActivity(), SelectLangActivity.class);
-                        intent.putExtra(EXTRA_TITLE, "Язык текста");
+                        intent.putExtra(EXTRA_TITLE, getString(R.string.lang_select_source));
                         startActivity(intent);
                     }
                 });
@@ -66,7 +73,7 @@ public class TranslationFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), SelectLangActivity.class);
-                        intent.putExtra(EXTRA_TITLE, "Язык перевода");
+                        intent.putExtra(EXTRA_TITLE, getString(R.string.lang_select_target));
                         startActivity(intent);
                     }
                 });

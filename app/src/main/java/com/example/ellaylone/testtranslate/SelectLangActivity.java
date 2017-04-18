@@ -6,6 +6,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
+import com.example.ellaylone.testtranslate.toolbar.ToolBarSimple;
+
 public class SelectLangActivity extends AppCompatActivity {
 
     @Override

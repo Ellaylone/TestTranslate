@@ -1,10 +1,12 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.ellaylone.testtranslate.R;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -33,7 +35,6 @@ public class LangsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        // TODO implement you own logic with ID
         return 0;
     }
 
@@ -49,8 +50,6 @@ public class LangsAdapter extends BaseAdapter {
 
         Map.Entry<String, String> item = getItem(position);
 
-        // TODO replace findViewById by ViewHolder
-        // ((TextView) result.findViewById(android.R.id.text1)).setText(item.getKey());
         ((TextView) result.findViewById(R.id.item_title)).setText(item.getValue());
 
         return result;

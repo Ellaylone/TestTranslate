@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.ellaylone.testtranslate.SelectLangActivity">
 
-    <com.example.ellaylone.testtranslate.ToolBarSimple
+    <com.example.ellaylone.testtranslate.toolbar.ToolBarSimple
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

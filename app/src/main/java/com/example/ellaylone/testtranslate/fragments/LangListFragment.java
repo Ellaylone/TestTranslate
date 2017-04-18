@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
