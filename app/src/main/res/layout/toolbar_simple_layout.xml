@@ -20,16 +20,6 @@
         android:layout_height="match_parent"
         android:layout_toEndOf="@id/toolbar_back"
         android:layout_toRightOf="@id/toolbar_back"
-        tools:text="История" />
-
-
-    <ImageButton
-        android:id="@+id/toolbar_delete"
-        style="@style/ToolBarDeleteIcon"
-        android:layout_width="@dimen/tool_bar_icon_width"
-        android:layout_height="@dimen/tool_bar_icon_height"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="center" />
+        tools:text="Язык перевода" />
 
 </RelativeLayout>

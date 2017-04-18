@@ -14,6 +14,7 @@
     <dimen name="tool_bar_h_padding">8dp</dimen>
     <dimen name="tool_bar_text_view_h_padding">8dp</dimen>
     <dimen name="tool_bar_text_size">18sp</dimen>
+    <dimen name="tool_bar_tab_h_padding">5dp</dimen>
 
     <!-- Translate text area -->
     <dimen name="source_text_area_margin">8dp</dimen>

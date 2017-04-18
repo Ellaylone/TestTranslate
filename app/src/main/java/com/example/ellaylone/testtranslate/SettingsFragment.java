@@ -20,7 +20,6 @@ public class SettingsFragment extends Fragment {
         SimpleToolBar toolBar = (SimpleToolBar) view.findViewById(R.id.toolbar);
         toolBar.setToolbarTitle("Настройки");
         toolBar.hideToolbarBackIcon();
-        toolBar.hideToolbarDeleteIcon();
 
         return view;
     }

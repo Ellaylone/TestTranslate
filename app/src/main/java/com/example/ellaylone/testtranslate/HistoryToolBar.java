@@ -6,43 +6,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 /**
- * Created by ellaylone on 17.04.17.
+ * Created by ellaylone on 18.04.17.
  */
 
-public class SimpleToolBar extends RelativeLayout implements View.OnClickListener {
+public class HistoryToolBar extends RelativeLayout implements View.OnClickListener {
 
     RelativeLayout activityRoot;
     ImageView toolbarBack;
-    TextView toolbarTitle;
+    ImageView toolbarDelete;
 
     OnClickListener onBackClickListener;
+    OnClickListener onDeleteClickListener;
 
-    public SimpleToolBar(Context context) {
+    public HistoryToolBar(Context context) {
         super(context);
         SetupLayout(context);
     }
 
-    public SimpleToolBar(Context context, AttributeSet attrs) {
+    public HistoryToolBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         SetupLayout(context);
     }
 
-    public SimpleToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HistoryToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         SetupLayout(context);
     }
 
     private void SetupLayout(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        activityRoot = (RelativeLayout) inflater.inflate(R.layout.toolbar_simple_layout, this);
+        activityRoot = (RelativeLayout) inflater.inflate(R.layout.toolbar_history_layout, this);
 
         toolbarBack = (ImageView) activityRoot.findViewById(R.id.toolbar_back);
         toolbarBack.setOnClickListener(this);
 
-        toolbarTitle = (TextView) activityRoot.findViewById(R.id.toolbar_title);
+        toolbarDelete = (ImageView) activityRoot.findViewById(R.id.toolbar_delete);
+        toolbarDelete.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -51,22 +52,26 @@ public class SimpleToolBar extends RelativeLayout implements View.OnClickListene
                 if(onBackClickListener != null) {
                     onBackClickListener.onClick(v);
                 }
+            case R.id.toolbar_delete:
+                if(onDeleteClickListener != null) {
+                    onDeleteClickListener.onClick(v);
+                }
         }
-    }
-
-    public void setToolbarTitle(String title) {
-        toolbarTitle.setText(title);
-    }
-
-    public void hideToolbarTitle() {
-        toolbarTitle.setVisibility(GONE);
     }
 
     public void hideToolbarBackIcon() {
         toolbarBack.setVisibility(GONE);
     }
 
+    public void hideToolbarDeleteIcon() {
+        toolbarDelete.setVisibility(GONE);
+    }
+
     public void setOnBackClickListener(OnClickListener onClickListener) {
         this.onBackClickListener = onClickListener;
+    }
+
+    public void setOnDeleteClickListener(OnClickListener onDeleteClickListener) {
+        this.onDeleteClickListener = onDeleteClickListener;
     }
 }

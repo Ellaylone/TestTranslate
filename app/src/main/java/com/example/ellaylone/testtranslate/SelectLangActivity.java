@@ -16,7 +16,6 @@ public class SelectLangActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         SimpleToolBar toolBar = (SimpleToolBar) findViewById(R.id.toolbar);
-        toolBar.hideToolbarDeleteIcon();
         toolBar.setToolbarTitle(intent.getStringExtra(TranslationFragment.EXTRA_TITLE));
         toolBar.setOnBackClickListener(new View.OnClickListener() {
             @Override
