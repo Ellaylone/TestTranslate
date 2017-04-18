@@ -12,25 +12,25 @@ import android.widget.TextView;
  * Created by ellaylone on 17.04.17.
  */
 
-public class SimpleToolBar extends RelativeLayout implements View.OnClickListener {
+public class ToolBarSimple extends RelativeLayout implements View.OnClickListener {
 
     RelativeLayout activityRoot;
     ImageView toolbarBack;
     TextView toolbarTitle;
 
-    OnClickListener onBackClickListener;
+    private OnClickListener onBackClickListener;
 
-    public SimpleToolBar(Context context) {
+    public ToolBarSimple(Context context) {
         super(context);
         SetupLayout(context);
     }
 
-    public SimpleToolBar(Context context, AttributeSet attrs) {
+    public ToolBarSimple(Context context, AttributeSet attrs) {
         super(context, attrs);
         SetupLayout(context);
     }
 
-    public SimpleToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ToolBarSimple(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         SetupLayout(context);
     }
@@ -46,9 +46,9 @@ public class SimpleToolBar extends RelativeLayout implements View.OnClickListene
     }
 
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.toolbar_back:
-                if(onBackClickListener != null) {
+                if (onBackClickListener != null) {
                     onBackClickListener.onClick(v);
                 }
         }

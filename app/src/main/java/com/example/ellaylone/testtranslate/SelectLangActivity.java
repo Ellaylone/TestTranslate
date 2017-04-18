@@ -15,7 +15,7 @@ public class SelectLangActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        SimpleToolBar toolBar = (SimpleToolBar) findViewById(R.id.toolbar);
+        ToolBarSimple toolBar = (ToolBarSimple) findViewById(R.id.toolbar);
         toolBar.setToolbarTitle(intent.getStringExtra(TranslationFragment.EXTRA_TITLE));
         toolBar.setOnBackClickListener(new View.OnClickListener() {
             @Override

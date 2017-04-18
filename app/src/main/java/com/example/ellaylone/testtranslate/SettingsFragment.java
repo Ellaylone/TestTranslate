@@ -17,7 +17,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_settings, container, false);
 
-        SimpleToolBar toolBar = (SimpleToolBar) view.findViewById(R.id.toolbar);
+        ToolBarSimple toolBar = (ToolBarSimple) view.findViewById(R.id.toolbar);
         toolBar.setToolbarTitle("Настройки");
         toolBar.hideToolbarBackIcon();
 

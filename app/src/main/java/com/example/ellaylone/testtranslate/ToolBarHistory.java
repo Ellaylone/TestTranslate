@@ -1,6 +1,8 @@
 package com.example.ellaylone.testtranslate;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,26 +13,28 @@ import android.widget.RelativeLayout;
  * Created by ellaylone on 18.04.17.
  */
 
-public class HistoryToolBar extends RelativeLayout implements View.OnClickListener {
+public class ToolBarHistory extends RelativeLayout implements View.OnClickListener {
 
     RelativeLayout activityRoot;
     ImageView toolbarBack;
     ImageView toolbarDelete;
 
-    OnClickListener onBackClickListener;
-    OnClickListener onDeleteClickListener;
+    TabLayout tabs;
 
-    public HistoryToolBar(Context context) {
+    private OnClickListener onBackClickListener;
+    private OnClickListener onDeleteClickListener;
+
+    public ToolBarHistory(Context context) {
         super(context);
         SetupLayout(context);
     }
 
-    public HistoryToolBar(Context context, AttributeSet attrs) {
+    public ToolBarHistory(Context context, AttributeSet attrs) {
         super(context, attrs);
         SetupLayout(context);
     }
 
-    public HistoryToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ToolBarHistory(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         SetupLayout(context);
     }
@@ -44,16 +48,22 @@ public class HistoryToolBar extends RelativeLayout implements View.OnClickListen
 
         toolbarDelete = (ImageView) activityRoot.findViewById(R.id.toolbar_delete);
         toolbarDelete.setOnClickListener(this);
+
+        tabs = (TabLayout) findViewById(R.id.toolbar_tabs);
+    }
+
+    public void setupTabsWithPager(ViewPager viewPager) {
+        tabs.setupWithViewPager(viewPager);
     }
 
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.toolbar_back:
-                if(onBackClickListener != null) {
+                if (onBackClickListener != null) {
                     onBackClickListener.onClick(v);
                 }
             case R.id.toolbar_delete:
-                if(onDeleteClickListener != null) {
+                if (onDeleteClickListener != null) {
                     onDeleteClickListener.onClick(v);
                 }
         }
