@@ -1,9 +1,12 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.fragments.HistoryFavoritesFragment;
 
 /**
  * Created by ellaylone on 16.04.17.
@@ -31,9 +34,9 @@ public class HistoryAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "History";
+                return mContext.getString(R.string.fragment_category_history);
             case 1:
-                return "Favourites";
+                return mContext.getString(R.string.fragment_category_favourites);
             default:
                 return null;
         }

@@ -1,78 +1,9 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <!-- Style for tabs -->
-    <style name="Tabs" parent="Widget.Design.TabLayout">
-        <item name="tabMode">fixed</item>
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
-        <item name="tabSelectedTextColor">@android:color/black</item>
-        <item name="tabIndicatorHeight">@dimen/nav_bar_tab_indicator_height</item>
-    </style>
-
-    <!-- Text appearance style for a tab -->
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@android:color/darker_gray</item>
-    </style>
-
-    <!-- Style for history tabs -->
-    <style name="HistoryTab" parent="Tabs">
-        <item name="tabGravity">center</item>
-        <item name="tabPaddingStart">@dimen/tool_bar_tab_h_padding</item>
-        <item name="tabPaddingEnd">@dimen/tool_bar_tab_h_padding</item>
-        <item name="tabIndicatorColor">@android:color/black</item>
-    </style>
-
-    <!-- Style for a tab that displays a category name -->
-    <style name="CategoryTab" parent="Tabs">
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
-        <item name="tabGravity">fill</item>
-        <item name="tabMaxWidth">@dimen/nav_bar_tab_max_width</item>
-    </style>
-
-    <!-- Category tab border style -->
-    <style name="CategoryTabBorder">
-        <item name="android:background">@color/lightGray</item>
-    </style>
-
-    <!-- Languages header -->
-    <style name="ToolBar">
-        <item name="android:isScrollContainer">false</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:paddingLeft">@dimen/tool_bar_h_padding</item>
-        <item name="android:paddingRight">@dimen/tool_bar_h_padding</item>
-    </style>
-
-    <style name="ToolBarIcon">
-        <item name="android:padding">8dp</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:background">@color/colorPrimary</item>
-    </style>
-
-    <style name="ToolBarSwitchIcon" parent="ToolBarIcon">
-        <item name="android:src">@drawable/double_arrow</item>
-    </style>
-
-    <style name="ToolBarBackIcon" parent="ToolBarIcon">
-        <item name="android:src">@drawable/back_arrow</item>
-    </style>
-
-    <style name="ToolBarDeleteIcon" parent="ToolBarIcon">
-        <item name="android:src">@drawable/trashcan</item>
-    </style>
-
-    <style name="ToolBarTextView">
-        <item name="android:ellipsize">end</item>
-        <item name="android:gravity">center_vertical|right</item>
-        <item name="android:paddingLeft">@dimen/tool_bar_text_view_h_padding</item>
-        <item name="android:paddingRight">@dimen/tool_bar_text_view_h_padding</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">@dimen/tool_bar_text_size</item>
     </style>
 
     <!-- Translation text area -->
@@ -87,28 +18,4 @@
         <item name="android:scrollbars">vertical</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
-
-    <!-- Lang list -->
-    <!-- Lang list item title -->
-    <style name="LangListItemTitle">
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:focusable">false</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:includeFontPadding">false</item>
-        <item name="android:lines">1</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <!-- Lang list checkmark icon style -->
-    <style name="LangListItemCheckmarkIcon">
-        <item name="android:src">@drawable/checkmark</item>
-    </style>
-
-    <!-- Lang list border style -->
-    <style name="LangListBorder">
-        <item name="android:background">@color/lightGray</item>
-    </style>
-
 </resources>

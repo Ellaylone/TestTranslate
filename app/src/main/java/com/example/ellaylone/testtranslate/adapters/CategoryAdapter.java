@@ -1,9 +1,14 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.fragments.HistoryFragment;
+import com.example.ellaylone.testtranslate.fragments.SettingsFragment;
+import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
 
 /**
  * Created by ellaylone on 16.04.17.

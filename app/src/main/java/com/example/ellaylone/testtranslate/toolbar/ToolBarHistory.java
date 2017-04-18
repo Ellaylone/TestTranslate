@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.toolbar;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.example.ellaylone.testtranslate.R;
 
 /**
  * Created by ellaylone on 18.04.17.

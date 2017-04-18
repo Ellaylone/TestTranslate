@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ellaylone.testtranslate.adapters.HistoryAdapter;
+import com.example.ellaylone.testtranslate.toolbar.ToolBarHistory;
+import com.example.ellaylone.testtranslate.R;
 
 /**
  * Created by ellaylone on 16.04.17.

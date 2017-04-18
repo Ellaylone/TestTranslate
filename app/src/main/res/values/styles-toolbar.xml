@@ -1,0 +1,41 @@
+<resources>
+    <!-- Toolbar styles -->
+    <style name="ToolBar">
+        <item name="android:isScrollContainer">false</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingLeft">@dimen/tool_bar_h_padding</item>
+        <item name="android:paddingRight">@dimen/tool_bar_h_padding</item>
+    </style>
+
+    <!-- Toolbar icon style -->
+    <style name="ToolBarIcon">
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <!-- Toolbar switch languages icon -->
+    <style name="ToolBarSwitchIcon" parent="ToolBarIcon">
+        <item name="android:src">@drawable/double_arrow</item>
+    </style>
+
+    <!-- Toolbar back icon -->
+    <style name="ToolBarBackIcon" parent="ToolBarIcon">
+        <item name="android:src">@drawable/back_arrow</item>
+    </style>
+
+    <!-- Toolbar delete icon -->
+    <style name="ToolBarDeleteIcon" parent="ToolBarIcon">
+        <item name="android:src">@drawable/trashcan</item>
+    </style>
+
+    <!-- Toolbar text view styles -->
+    <style name="ToolBarTextView">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingLeft">@dimen/tool_bar_text_view_h_padding</item>
+        <item name="android:paddingRight">@dimen/tool_bar_text_view_h_padding</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/tool_bar_text_size</item>
+    </style>
+</resources>

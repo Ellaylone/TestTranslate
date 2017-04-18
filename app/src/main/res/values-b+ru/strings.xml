@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Переводчик</string>
+
+    <!-- category names -->
+    <string name="fragment_category_history">История</string>
+    <string name="fragment_category_settings">Настройки</string>
+    <string name="fragment_category_translation">Перевод</string>
+    <string name="fragment_category_favourites">Избранное</string>
+
+    <!-- language select titles -->
+    <string name="lang_select_source">Язык текста</string>
+    <string name="lang_select_target">Язык перевода</string>
+</resources>
