@@ -14,8 +14,16 @@
     <dimen name="tool_bar_h_padding">8dp</dimen>
     <dimen name="tool_bar_text_view_h_padding">8dp</dimen>
     <dimen name="tool_bar_text_size">18sp</dimen>
+    <dimen name="tool_bar_tab_h_padding">5dp</dimen>
 
     <!-- Translate text area -->
     <dimen name="source_text_area_margin">8dp</dimen>
+
+    <!-- Lang list -->
+    <dimen name="lang_list_border_height">1dp</dimen>
+    <dimen name="lang_list_item_height">48dp</dimen>
+    <dimen name="lang_list_item_h_padding">16dp</dimen>
+    <dimen name="lang_list_icon_height">16dp</dimen>
+    <dimen name="lang_list_icon_width">16dp</dimen>
 
 </resources>

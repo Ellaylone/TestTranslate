@@ -8,19 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by ellaylone on 16.04.17.
+ * Created by ellaylone on 17.04.17.
  */
 
-public class SettingsFragment extends Fragment {
+public class LangListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category_settings, container, false);
+        //View rootView = inflater.inflate(R.layout.lang_list, container, false);
+        //ListView listView = (ListView) rootView.findViewById(R.id.list);
 
-        ToolBarSimple toolBar = (ToolBarSimple) view.findViewById(R.id.toolbar);
-        toolBar.setToolbarTitle("Настройки");
-        toolBar.hideToolbarBackIcon();
-
-        return view;
+        //listView.setAdapter();
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
