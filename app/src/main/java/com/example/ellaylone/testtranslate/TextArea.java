@@ -1,15 +1,15 @@
 package com.example.ellaylone.testtranslate;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
-import android.view.View;
 
 /**
  * Created by ellaylone on 18.04.17.
  */
 
-public class TextArea extends AppCompatEditText implements View.OnFocusChangeListener {
+public class TextArea extends AppCompatEditText {
     AppCompatEditText textArea;
 
     public TextArea(Context context) {
@@ -25,18 +25,13 @@ public class TextArea extends AppCompatEditText implements View.OnFocusChangeLis
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (v.getId() == R.id.source_text_area) {
-            setInputFocusState(hasFocus);
-        }
+    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
+        super.onFocusChanged(focused, direction, previouslyFocusedRect);
+     //   setFocusBorder(focused);
     }
 
-    private void setInputFocusState(boolean hasFocus) {
-        setFocusBorder(hasFocus);
-    }
-
-    private void setFocusBorder(boolean active) {
-        textArea.setBackgroundResource(active ?
+    private void setFocusBorder(boolean focused) {
+        textArea.setBackgroundResource(focused ?
                 R.drawable.text_area_border_focus :
                 R.drawable.text_area_border_unfocus);
     }
