@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.example.ellaylone.testtranslate.TextArea
+        android:id="@+id/source_text_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="hello world"
+        android:layout_alignParentTop="true"
+        style="@style/TranslateTextArea"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:textAllCaps="true"
+        tools:text="P"/>
+
+</RelativeLayout>

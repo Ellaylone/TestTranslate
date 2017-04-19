@@ -10,29 +10,41 @@ import android.util.AttributeSet;
  */
 
 public class TextArea extends AppCompatEditText {
-    AppCompatEditText textArea;
+    private Context mContext;
+    private boolean hasFocus;
 
     public TextArea(Context context) {
         super(context);
+        mContext = context;
+        hasFocus = false;
     }
 
     public TextArea(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
+        hasFocus = false;
     }
 
     public TextArea(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
+        hasFocus = false;
     }
 
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
-     //   setFocusBorder(focused);
+        hasFocus = focused;
+        setFocusBorder(focused);
     }
 
     private void setFocusBorder(boolean focused) {
-        textArea.setBackgroundResource(focused ?
+        this.setBackgroundResource(focused ?
                 R.drawable.text_area_border_focus :
                 R.drawable.text_area_border_unfocus);
+    }
+
+    public boolean isHasFocus() {
+        return hasFocus;
     }
 }
