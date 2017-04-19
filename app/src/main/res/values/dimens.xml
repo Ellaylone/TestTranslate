@@ -18,6 +18,8 @@
 
     <!-- Translate text area -->
     <dimen name="source_text_area_margin">8dp</dimen>
+    <dimen name="source_text_v_padding">4dp</dimen>
+    <dimen name="source_text_h_padding">8dp</dimen>
 
     <!-- Lang list -->
     <dimen name="lang_list_border_height">1dp</dimen>
