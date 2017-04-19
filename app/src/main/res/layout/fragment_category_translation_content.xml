@@ -7,13 +7,10 @@
 
     <include layout="@layout/translate_toolbar_layout" />
 
-    <com.example.ellaylone.testtranslate.TextArea
-        android:id="@+id/source_text_area"
-        style="@style/TranslateTextArea"
+    <com.example.ellaylone.testtranslate.TextAreaWrap
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/source_text_area_margin"
-        tools:text="hello world" />
+        android:layout_margin="@dimen/source_text_area_margin" />
 
     <include layout="@layout/translation_result" />
 

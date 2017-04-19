@@ -8,7 +8,7 @@
 
     <!-- Translation text area -->
     <style name="TranslateTextArea">
-        <item name="android:background">@drawable/text_area_border_focus</item>
+        <item name="android:background">@drawable/text_area_border_unfocus</item>
         <item name="android:gravity">top|left</item>
         <item name="android:inputType">textMultiLine</item>
         <item name="android:lines">6</item>

@@ -12,10 +12,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <com.example.ellaylone.testtranslate.TextArea
-            android:id="@+id/source_text_area"
-            style="@style/TranslateTextAreaLand"
+        <com.example.ellaylone.testtranslate.TextAreaWrap
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/source_text_area_margin" />
 
