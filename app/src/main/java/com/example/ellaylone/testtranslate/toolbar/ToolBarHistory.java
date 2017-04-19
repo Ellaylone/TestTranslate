@@ -2,7 +2,6 @@ package com.example.ellaylone.testtranslate.toolbar;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.SwipeViewPager;
 
 /**
  * Created by ellaylone on 18.04.17.
@@ -54,8 +54,8 @@ public class ToolBarHistory extends RelativeLayout implements View.OnClickListen
         tabs = (TabLayout) findViewById(R.id.toolbar_tabs);
     }
 
-    public void setupTabsWithPager(ViewPager viewPager) {
-        tabs.setupWithViewPager(viewPager);
+    public void setupTabsWithPager(SwipeViewPager swipeViewPager) {
+        tabs.setupWithViewPager(swipeViewPager);
     }
 
     public void onClick(View v) {

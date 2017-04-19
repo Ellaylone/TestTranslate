@@ -9,9 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.SwipeViewPager;
 import com.example.ellaylone.testtranslate.adapters.HistoryAdapter;
 import com.example.ellaylone.testtranslate.toolbar.ToolBarHistory;
-import com.example.ellaylone.testtranslate.R;
 
 /**
  * Created by ellaylone on 16.04.17.
@@ -25,13 +26,15 @@ public class HistoryFragment extends Fragment {
 
         ToolBarHistory toolBar = (ToolBarHistory) view.findViewById(R.id.toolbar);
         toolBar.hideToolbarBackIcon();
+        toolBar.hideToolbarDeleteIcon();
 
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.history_pager);
+        SwipeViewPager swipeViewPager = (SwipeViewPager) view.findViewById(R.id.history_pager);
 
         HistoryAdapter historyAdapter = new HistoryAdapter(getContext(), getChildFragmentManager());
-        viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(historyAdapter);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        swipeViewPager.setOffscreenPageLimit(2);
+        swipeViewPager.setAdapter(historyAdapter);
+        swipeViewPager.setEnabled(false);
+        swipeViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 Log.v("change", "scroll");
@@ -48,7 +51,7 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-        toolBar.setupTabsWithPager(viewPager);
+        toolBar.setupTabsWithPager(swipeViewPager);
 
         return view;
     }

@@ -8,7 +8,7 @@
 
     <!-- Translation text area -->
     <style name="TranslateTextArea">
-        <item name="android:background">@drawable/border</item>
+        <item name="android:background">@drawable/text_area_border_focus</item>
         <item name="android:gravity">top|left</item>
         <item name="android:inputType">textMultiLine</item>
         <item name="android:lines">6</item>
@@ -17,5 +17,20 @@
         <item name="android:scrollbarStyle">insideInset</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:paddingLeft">@dimen/source_text_h_padding</item>
+        <item name="android:paddingRight">@dimen/source_text_h_padding</item>
+        <item name="android:paddingTop">@dimen/source_text_v_padding</item>
+        <item name="android:paddingBottom">@dimen/source_text_v_padding</item>
+    </style>
+
+    <!-- Translation text area (landscape) -->
+    <style name="TranslateTextAreaLand" parent="TranslateTextArea">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- Translation result -->
+    <!-- Translation result (landscape) -->
+    <style name="TranslateResultLand">
+        <item name="android:layout_weight">1</item>
     </style>
 </resources>
