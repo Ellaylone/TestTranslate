@@ -13,6 +13,7 @@ import com.example.ellaylone.testtranslate.fragments.HistoryFavoritesFragment;
  */
 public class HistoryAdapter extends FragmentPagerAdapter {
 
+    private final int TABS_COUNT = 2;
     private Context mContext;
 
     public HistoryAdapter(Context context, FragmentManager fm) {
@@ -21,13 +22,14 @@ public class HistoryAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    //TODO setup different instaces depending on position
     public Fragment getItem(int position) {
         return HistoryFavoritesFragment.getInstance();
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return TABS_COUNT;
     }
 
     @Override

@@ -15,15 +15,23 @@ import com.example.ellaylone.testtranslate.toolbar.ToolBarSimple;
  */
 
 public class SettingsFragment extends Fragment {
+    private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category_settings, container, false);
+        view = inflater.inflate(R.layout.fragment_category_settings, container, false);
 
+        setupToolBar();
+
+        return view;
+    }
+
+    /**
+     * Setup tool bar for fragment
+     */
+    private void setupToolBar() {
         ToolBarSimple toolBar = (ToolBarSimple) view.findViewById(R.id.toolbar);
         toolBar.setToolbarTitle(getString(R.string.fragment_category_settings));
         toolBar.hideToolbarBackIcon();
-
-        return view;
     }
 }

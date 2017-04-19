@@ -24,8 +24,6 @@ public class TextArea extends AppCompatEditText implements View.OnFocusChangeLis
         super(context, attrs, defStyleAttr);
     }
 
-
-
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (v.getId() == R.id.source_text_area) {

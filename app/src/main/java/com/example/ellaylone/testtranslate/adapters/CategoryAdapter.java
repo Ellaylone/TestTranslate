@@ -16,6 +16,7 @@ import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
 
 public class CategoryAdapter extends FragmentPagerAdapter {
 
+    private final int TABS_COUNT = 3;
     private Context mContext;
 
     public CategoryAdapter(Context context, FragmentManager fm) {
@@ -39,7 +40,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return TABS_COUNT;
     }
 
     @Override

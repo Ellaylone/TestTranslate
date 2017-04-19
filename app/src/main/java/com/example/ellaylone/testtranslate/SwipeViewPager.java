@@ -27,11 +27,19 @@ public class SwipeViewPager extends ViewPager {
         return enabled ? super.onInterceptTouchEvent(ev) : false;
     }
 
+    /**
+     * @return boolean is swipe enabled
+     */
     @Override
     public boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     * Switch swipe on/off
+     *
+     * @param enabled boolean desired swipe status
+     */
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
