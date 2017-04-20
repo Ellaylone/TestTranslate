@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.R;
@@ -17,10 +18,14 @@ import java.util.Map;
 
 public class LangsAdapter extends BaseAdapter {
     private final ArrayList mData;
+    private String activeLanguage;
+    View.OnClickListener onLangClickListener;
 
-    public LangsAdapter(Map<String, String> map) {
+    public LangsAdapter(Map<String, String> map, String activeLanguage, View.OnClickListener onLangClickListener) {
         mData = new ArrayList();
         mData.addAll(map.entrySet());
+        this.activeLanguage = activeLanguage;
+        this.onLangClickListener = onLangClickListener;
     }
 
     @Override
@@ -50,7 +55,12 @@ public class LangsAdapter extends BaseAdapter {
 
         Map.Entry<String, String> item = getItem(position);
 
-        ((TextView) result.findViewById(R.id.item_title)).setText(item.getValue());
+        TextView itemTitle = (TextView) result.findViewById(R.id.item_title);
+        itemTitle.setText(item.getValue());
+        itemTitle.setHint(item.getKey());
+        itemTitle.setOnClickListener(onLangClickListener);
+
+        result.findViewById(R.id.item_selected).setVisibility(item.getKey().trim().equalsIgnoreCase(activeLanguage) ? ImageView.VISIBLE : ImageView.GONE);
 
         return result;
     }

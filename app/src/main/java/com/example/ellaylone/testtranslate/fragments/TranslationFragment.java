@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.DbProvider;
@@ -40,10 +41,15 @@ import retrofit2.Retrofit;
  */
 
 public class TranslationFragment extends Fragment {
-    public static final String EXTRA_TITLE = "TITLE";
     private static final String BUNDLE_LANGS_NAME = "LANGS";
     private static final String BUNDLE_ACTIVE_LANGS_NAME = "ACTIVE_LANGS";
 
+    public static final String EXTRA_TITLE = "TITLE";
+    public static final String EXTRA_LANGS = "LANGS";
+    public static final String EXTRA_ACTIVE_LANG = "ACTIVE_LANG";
+    public static final String EXTRA_ACTIVE_LANG_TYPE = "ACTIVE_LANG_TYPE";
+
+    private ImageView switchLangs;
     private TextView sourceLang;
     private TextView targetLang;
     private String activeSourceLang;
@@ -101,16 +107,19 @@ public class TranslationFragment extends Fragment {
 
         sourceLang = (TextView) view.findViewById(R.id.source_lang);
         targetLang = (TextView) view.findViewById(R.id.target_lang);
+        switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
 
         if (savedInstanceState != null) {
             restoreLangs(savedInstanceState);
             restoreActiveLangs(savedInstanceState);
 
             setupTextViews();
+            setupSwitch();
         } else {
             updateActiveLangs();
             updateLangs();
         }
+
 
         TextArea textArea = (TextArea) view.findViewById(R.id.source_text_area);
         textArea.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -133,15 +142,53 @@ public class TranslationFragment extends Fragment {
         return view;
     }
 
+    private void setupSwitch() {
+        switchLangs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp = activeSourceLang;
+                activeSourceLang = activeTargetLang;
+                activeTargetLang = temp;
+                saveActiveLangs(activeSourceLang, activeTargetLang);
+                setupTextViews();
+            }
+        });
+    }
+
+    private void saveActiveLangs(String sourceCode, String targetCode) {
+        ContentValues newValues = new ContentValues();
+
+        newValues.put("LANG_CODE", sourceCode);
+        newValues.put("LANG_TYPE", 1);
+
+        db.update(DbProvider.ACTIVE_LANGS_TABLE_NAME, newValues, String.format("%s = ?", "LANG_TYPE"),
+                new String[]{"1"});
+        newValues.clear();
+
+        newValues.put("LANG_CODE", targetCode);
+        newValues.put("LANG_TYPE", 2);
+
+        db.update(DbProvider.ACTIVE_LANGS_TABLE_NAME, newValues, String.format("%s = ?", "LANG_TYPE"),
+                new String[]{"2"});
+        newValues.clear();
+    }
+
     private void setupTextViews() {
         sourceLang.setText(langs.get(activeSourceLang));
         targetLang.setText(langs.get(activeTargetLang));
+
+        final ArrayList<Map> list = new ArrayList<>();
+        list.add(langs);
 
         sourceLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SelectLangActivity.class);
                 intent.putExtra(EXTRA_TITLE, getString(R.string.lang_select_source));
+                intent.putExtra(EXTRA_LANGS, list);
+                intent.putExtra(EXTRA_ACTIVE_LANG, activeSourceLang);
+                intent.putExtra(EXTRA_ACTIVE_LANG_TYPE, 1);
+
                 startActivity(intent);
             }
         });
@@ -151,6 +198,9 @@ public class TranslationFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SelectLangActivity.class);
                 intent.putExtra(EXTRA_TITLE, getString(R.string.lang_select_target));
+                intent.putExtra(EXTRA_LANGS, list);
+                intent.putExtra(EXTRA_ACTIVE_LANG, activeTargetLang);
+                intent.putExtra(EXTRA_ACTIVE_LANG_TYPE, 2);
                 startActivity(intent);
             }
         });
@@ -189,6 +239,7 @@ public class TranslationFragment extends Fragment {
                 c.moveToNext();
             }
             setupTextViews();
+            setupSwitch();
         } else {
             updateLangsList();
         }
@@ -197,13 +248,17 @@ public class TranslationFragment extends Fragment {
     private void updateActiveLangsList() {
         ContentValues newValues = new ContentValues();
 
-        newValues.put("LANG_CODE", "en");
+        activeSourceLang = "en";
+
+        newValues.put("LANG_CODE", activeSourceLang);
         newValues.put("LANG_TYPE", 1);
 
         db.insert(DbProvider.ACTIVE_LANGS_TABLE_NAME, null, newValues);
         newValues.clear();
 
-        newValues.put("LANG_CODE", "ru");
+        activeTargetLang = "ru";
+
+        newValues.put("LANG_CODE", activeTargetLang);
         newValues.put("LANG_TYPE", 2);
 
         db.insert(DbProvider.ACTIVE_LANGS_TABLE_NAME, null, newValues);
@@ -224,7 +279,6 @@ public class TranslationFragment extends Fragment {
                 langs = response.body().getLangs();
                 if (langs != null) {
                     writeLangs();
-                    setupTextViews();
                 }
             }
 
@@ -248,5 +302,8 @@ public class TranslationFragment extends Fragment {
 
             newValues.clear();
         }
+
+        setupTextViews();
+        setupSwitch();
     }
 }
