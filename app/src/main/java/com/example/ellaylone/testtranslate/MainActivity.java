@@ -1,6 +1,7 @@
 package com.example.ellaylone.testtranslate;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +16,18 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout root;
     private TabLayout tabLayout;
     private SwipeViewPager swipeViewPager;
+    private SQLiteDatabase db;
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = ((TranslateApp) getApplicationContext()).getDb();
+
         setContentView(R.layout.activity_main);
 
         setupBottomNavigation();
