@@ -28,4 +28,13 @@
     <dimen name="lang_list_icon_height">16dp</dimen>
     <dimen name="lang_list_icon_width">16dp</dimen>
 
+    <!-- Translate result -->
+    <dimen name="translate_result_text_size">16sp</dimen>
+    <dimen name="translate_result_icon_height">48dp</dimen>
+    <dimen name="translate_result_icon_width">48dp</dimen>
+    <dimen name="translate_result_icon_margin">8dp</dimen>
+
+    <!-- Translation fullscreen -->
+    <dimen name="translation_fullscreen_text_size">40sp</dimen>
+
 </resources>

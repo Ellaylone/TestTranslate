@@ -25,6 +25,7 @@ import com.example.ellaylone.testtranslate.GetTranslationRequest;
 import com.example.ellaylone.testtranslate.MainActivity;
 import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.SelectLangActivity;
+import com.example.ellaylone.testtranslate.ShowTranslationActivity;
 import com.example.ellaylone.testtranslate.TextArea;
 import com.example.ellaylone.testtranslate.TranslateApi;
 import com.example.ellaylone.testtranslate.TranslateProvider;
@@ -51,6 +52,7 @@ public class TranslationFragment extends Fragment {
     public static final String EXTRA_LANGS = "LANGS";
     public static final String EXTRA_ACTIVE_LANG = "ACTIVE_LANG";
     public static final String EXTRA_ACTIVE_LANG_TYPE = "ACTIVE_LANG_TYPE";
+    public static final String EXTRA_TRANSLATION_TO_SHOW = "TRANSLATION_TO_SHOW";
     private static final String BUNDLE_LANGS_NAME = "LANGS";
     private static final String BUNDLE_ACTIVE_LANGS_NAME = "ACTIVE_LANGS";
     private static final String BUNDLE_SOURCE_TEXT = "SOURCE_TEXT";
@@ -63,6 +65,8 @@ public class TranslationFragment extends Fragment {
     private TextView targetLang;
     private TextView translation;
     private TextArea sourceText;
+    private TextView showTranslation;
+    private TextView addFav;
     private String activeSourceLang;
     private String activeTargetLang;
     private List<String> translatedText;
@@ -155,6 +159,10 @@ public class TranslationFragment extends Fragment {
         targetLang = (TextView) view.findViewById(R.id.target_lang);
         switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
         translation = (TextView) view.findViewById(R.id.translation_result_text);
+        showTranslation = (TextView) view.findViewById(R.id.show_translation);
+        addFav = (TextView) view.findViewById(R.id.add_fav);
+
+        setupTranslationResults();
 
         if (savedInstanceState != null) {
             restoreLangs(savedInstanceState);
@@ -216,6 +224,27 @@ public class TranslationFragment extends Fragment {
         return view;
     }
 
+    private void setupTranslationResults() {
+        addFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        showTranslation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShowTranslationActivity.class);
+                intent.putExtra(EXTRA_TRANSLATION_TO_SHOW, translatedText.get(0));
+
+                startActivity(intent);
+            }
+        });
+        
+        displayTranslation();
+    }
+
     private void getTranslation(String text) {
         if (text.equals("")) {
             translatedText = null;
@@ -251,6 +280,9 @@ public class TranslationFragment extends Fragment {
             resultText = translatedText.get(0);
         }
 
+        showTranslation.setVisibility(translatedText == null ? View.GONE : View.VISIBLE);
+        addFav.setVisibility(translatedText == null ? View.GONE : View.VISIBLE);
+
         translation.setText(resultText);
     }
 
@@ -263,7 +295,10 @@ public class TranslationFragment extends Fragment {
                 activeTargetLang = temp;
                 saveActiveLangs(activeSourceLang, activeTargetLang);
                 setupTextViews();
+
                 sourceText.setText(translatedText.get(0));
+                translatedText = null;
+                displayTranslation();
             }
         });
     }

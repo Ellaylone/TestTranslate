@@ -29,8 +29,19 @@
     </style>
 
     <!-- Translation result -->
+    <style name="TranslateResult">
+        <item name="android:textSize">@dimen/translate_result_text_size</item>
+    </style>
+
     <!-- Translation result (landscape) -->
-    <style name="TranslateResultLand">
+    <style name="TranslateResultLand" parent="TranslateResult">
         <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- Translation icon -->
+    <style name="TranslateResultIcon">
+        <item name="android:width">@dimen/translate_result_icon_height</item>
+        <item name="android:height">@dimen/translate_result_icon_width</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

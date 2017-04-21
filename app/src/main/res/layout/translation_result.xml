@@ -10,23 +10,30 @@
         android:id="@+id/translation_result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        style="@style/TranslateResult"
         tools:text="привет мир" />
 
     <TextView
-        android:id="@+id/add_fac"
+        android:id="@+id/add_fav"
+        style="@style/TranslateResultIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:text="F"
         tools:text="F" />
 
     <TextView
         android:id="@+id/show_translation"
+        style="@style/TranslateResultIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/add_fac"
+        android:layout_below="@id/add_fav"
+        android:layout_marginTop="@dimen/translate_result_icon_margin"
+        android:text="S"
         tools:text="S" />
 
 </RelativeLayout>
