@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.DbProvider;
 import com.example.ellaylone.testtranslate.GetLangList;
+import com.example.ellaylone.testtranslate.GetTranslation;
+import com.example.ellaylone.testtranslate.GetTranslationRequest;
 import com.example.ellaylone.testtranslate.MainActivity;
 import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.SelectLangActivity;
@@ -28,6 +33,7 @@ import com.example.ellaylone.testtranslate.requests.GetLangsRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -41,25 +47,31 @@ import retrofit2.Retrofit;
  */
 
 public class TranslationFragment extends Fragment {
-    private static final String BUNDLE_LANGS_NAME = "LANGS";
-    private static final String BUNDLE_ACTIVE_LANGS_NAME = "ACTIVE_LANGS";
-
     public static final String EXTRA_TITLE = "TITLE";
     public static final String EXTRA_LANGS = "LANGS";
     public static final String EXTRA_ACTIVE_LANG = "ACTIVE_LANG";
     public static final String EXTRA_ACTIVE_LANG_TYPE = "ACTIVE_LANG_TYPE";
-
+    private static final String BUNDLE_LANGS_NAME = "LANGS";
+    private static final String BUNDLE_ACTIVE_LANGS_NAME = "ACTIVE_LANGS";
+    private static final String BUNDLE_SOURCE_TEXT = "SOURCE_TEXT";
+    private static final String BUNDLE_TRANSLATED_TEXT = "TRANSLATED_TEXT";
     private Retrofit retrofit;
     private TranslateApi translateApi;
 
     private ImageView switchLangs;
     private TextView sourceLang;
     private TextView targetLang;
+    private TextView translation;
+    private TextArea sourceText;
     private String activeSourceLang;
     private String activeTargetLang;
+    private List<String> translatedText;
 
     private SQLiteDatabase db;
     private Map<String, String> langs;
+
+    private Handler handler = new Handler();
+    private Runnable runnable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +93,28 @@ public class TranslationFragment extends Fragment {
         super.onSaveInstanceState(outState);
         storeLangs(outState);
         storeActiveLangs(outState);
+        storeSourceText(outState);
+        storeTranslatedText(outState);
+    }
+
+    private void storeSourceText(Bundle outState) {
+        outState.putString(BUNDLE_SOURCE_TEXT, sourceText.getText().toString());
+    }
+
+    private void restoreSourceText(Bundle inState) {
+        sourceText.setText(inState.getString(BUNDLE_SOURCE_TEXT));
+    }
+
+    private void storeTranslatedText(Bundle outState) {
+        ArrayList<List> list = new ArrayList<>();
+        list.add(translatedText);
+
+        outState.putSerializable(BUNDLE_TRANSLATED_TEXT, list);
+    }
+
+    private void restoreTranslatedText(Bundle inState) {
+        ArrayList<List> list = (ArrayList<List>) inState.getSerializable(BUNDLE_TRANSLATED_TEXT);
+        translatedText = list.get(0);
     }
 
     private void storeLangs(Bundle outState) {
@@ -120,21 +154,25 @@ public class TranslationFragment extends Fragment {
         sourceLang = (TextView) view.findViewById(R.id.source_lang);
         targetLang = (TextView) view.findViewById(R.id.target_lang);
         switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
+        translation = (TextView) view.findViewById(R.id.translation_result_text);
 
         if (savedInstanceState != null) {
             restoreLangs(savedInstanceState);
             restoreActiveLangs(savedInstanceState);
+            restoreSourceText(savedInstanceState);
+            restoreTranslatedText(savedInstanceState);
 
             setupTextViews();
             setupSwitch();
+            displayTranslation();
         } else {
             updateActiveLangs();
             updateLangs();
         }
 
 
-        TextArea textArea = (TextArea) view.findViewById(R.id.source_text_area);
-        textArea.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        sourceText = (TextArea) view.findViewById(R.id.source_text_area);
+        sourceText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 final TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
@@ -150,8 +188,70 @@ public class TranslationFragment extends Fragment {
                 }
             }
         });
+        sourceText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                final String newText = s.toString();
+                handler.removeCallbacks(runnable);
+
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        getTranslation(newText);
+                    }
+                };
+
+                handler.postDelayed(runnable, 1000);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         return view;
+    }
+
+    private void getTranslation(String text) {
+        if (text.equals("")) {
+            translatedText = null;
+            displayTranslation();
+        } else {
+            GetTranslationRequest getTranslationRequest = new GetTranslationRequest();
+
+            getTranslationRequest.setTranslationText(text);
+            getTranslationRequest.setSourceLang(activeSourceLang);
+            getTranslationRequest.setTargetLang(activeTargetLang);
+
+            Call<GetTranslation> translationCall = getTranslationRequest.getQuery(translateApi);
+
+            translationCall.enqueue(new Callback<GetTranslation>() {
+                @Override
+                public void onResponse(Call<GetTranslation> call, Response<GetTranslation> response) {
+                    translatedText = response.body().getText();
+                    displayTranslation();
+                }
+
+                @Override
+                public void onFailure(Call<GetTranslation> call, Throwable t) {
+                    Log.e("fail", "" + t);
+                }
+            });
+        }
+    }
+
+    private void displayTranslation() {
+        String resultText = "";
+
+        if (translatedText != null) {
+            resultText = translatedText.get(0);
+        }
+
+        translation.setText(resultText);
     }
 
     private void setupSwitch() {
@@ -163,6 +263,7 @@ public class TranslationFragment extends Fragment {
                 activeTargetLang = temp;
                 saveActiveLangs(activeSourceLang, activeTargetLang);
                 setupTextViews();
+                sourceText.setText(translatedText.get(0));
             }
         });
     }

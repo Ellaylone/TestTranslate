@@ -10,20 +10,26 @@ import retrofit2.Call;
 
 public class GetTranslationRequest implements IRequest<TranslateApi, GetTranslation> {
 
+    private String translationText;
+    private String sourceLang;
+    private String targetLang;
+
+    public void setTranslationText(String translationText) {
+        this.translationText = translationText;
+    }
+
+    public void setSourceLang(String sourceLang) {
+        this.sourceLang = sourceLang;
+    }
+
+    public void setTargetLang(String targetLang) {
+        this.targetLang = targetLang;
+    }
+
     @Override
     public Call<GetTranslation> getQuery(TranslateApi translateApi) {
-        String lang = "en-ru";
+        String lang = sourceLang + "-" + targetLang;
         String key = TranslateProvider.getKEY();
-//        if (trHolder.getTexts() != null) {
-//            List<String> textsArr = new ArrayList<>();
-//            for (String item : trHolder.getTexts()) {
-//                String normalized = textNormalizer.normalize(item);
-//                textsArr.add(normalized);
-//            }
-//            return translateApi.getTranslation(srv, key, textsArr, lang);
-//        } else {
-//            String normalized = textNormalizer.normalize(trHolder.getText());
-            return translateApi.getTranslation(key, "asdasd", lang);
-//        }
+        return translateApi.getTranslation(key, translationText, lang);
     }
 }
