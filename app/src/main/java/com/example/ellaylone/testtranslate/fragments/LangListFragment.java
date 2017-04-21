@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.DbProvider;
+import com.example.ellaylone.testtranslate.MapUtil;
 import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.SelectLangActivity;
 import com.example.ellaylone.testtranslate.adapters.LangsAdapter;
@@ -34,6 +35,8 @@ public class LangListFragment extends Fragment {
 
         ArrayList<Map> list = (ArrayList<Map>) getArguments().getSerializable(TranslationFragment.EXTRA_LANGS);
         langs = list.get(0);
+
+        langs = MapUtil.sortByValue(langs);
 
         final String activeLang = getArguments().getString(TranslationFragment.EXTRA_ACTIVE_LANG);
         final Integer activeLangType = getArguments().getInt(TranslationFragment.EXTRA_ACTIVE_LANG_TYPE);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * Created by ellaylone on 18.04.17.
@@ -12,6 +13,11 @@ import android.util.AttributeSet;
 public class TextArea extends AppCompatEditText {
     private Context mContext;
     private boolean hasFocus;
+
+    private float x1, x2;
+    static final int MIN_DISTANCE = 150;
+
+    private String sourceBackup = "";
 
     public TextArea(Context context) {
         super(context);
@@ -46,5 +52,30 @@ public class TextArea extends AppCompatEditText {
 
     public boolean isHasFocus() {
         return hasFocus;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > MIN_DISTANCE)
+                {
+                    if(this.getText().toString().equals("")) {
+                        this.setText(sourceBackup);
+                        sourceBackup = "";
+                    } else {
+                        sourceBackup = this.getText().toString();
+                        this.setText("");
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 }

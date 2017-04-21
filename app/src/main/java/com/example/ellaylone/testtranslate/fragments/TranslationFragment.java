@@ -49,6 +49,9 @@ public class TranslationFragment extends Fragment {
     public static final String EXTRA_ACTIVE_LANG = "ACTIVE_LANG";
     public static final String EXTRA_ACTIVE_LANG_TYPE = "ACTIVE_LANG_TYPE";
 
+    private Retrofit retrofit;
+    private TranslateApi translateApi;
+
     private ImageView switchLangs;
     private TextView sourceLang;
     private TextView targetLang;
@@ -61,7 +64,16 @@ public class TranslationFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupRetrofit();
         setRetainInstance(true);
+    }
+
+    private void setupRetrofit() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(TranslateProvider.getENDPOINT())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        translateApi = retrofit.create(TranslateApi.class);
     }
 
     @Override
@@ -266,11 +278,6 @@ public class TranslationFragment extends Fragment {
     }
 
     private void updateLangsList() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(TranslateProvider.getENDPOINT())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TranslateApi translateApi = retrofit.create(TranslateApi.class);
         GetLangsRequest getLangsRequest = new GetLangsRequest();
         Call<GetLangList> langsCall = getLangsRequest.getQuery(translateApi);
         langsCall.enqueue(new Callback<GetLangList>() {
