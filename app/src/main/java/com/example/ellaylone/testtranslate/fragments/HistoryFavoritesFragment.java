@@ -1,25 +1,80 @@
 package com.example.ellaylone.testtranslate.fragments;
 
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.ellaylone.testtranslate.DbProvider;
+import com.example.ellaylone.testtranslate.MainActivity;
 import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.TranslationItem;
+import com.example.ellaylone.testtranslate.adapters.HistoryFavItemAdapter;
+
+import java.util.ArrayList;
 
 
 public class HistoryFavoritesFragment extends Fragment {
-    public HistoryFavoritesFragment() {
+    private boolean isHistory;
+
+    private SQLiteDatabase db;
+
+    private ArrayList<TranslationItem> listData = new ArrayList<>();
+    private ListView listView;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(
+                R.layout.history_list, container, false);
+
+        listView = (ListView) rootView.findViewById(R.id.list);
+
+        db = ((MainActivity) getActivity()).getDb();
+
+        isHistory = getArguments().getBoolean("IS_HISTORY");
+
+        if(isHistory) {
+            setupHistory();
+        } else {
+            setupFavourites();
+        }
+
+        return rootView;
     }
 
-    public static HistoryFavoritesFragment getInstance() {
-        return new HistoryFavoritesFragment();
+    private void populateList() {
+        HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData);
+        listView.setAdapter(adapter);
     }
 
-    View setupFragment(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(
-                R.layout.fragment_category_history, container, false);
-        return view;
+    private void setupHistory() {
+        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
+        if (c.getCount() != 0) {
+            c.moveToFirst();
+            for (int i = 0; i < c.getCount(); i++) {
+                listData.add(new TranslationItem(
+                        c.getString(c.getColumnIndex("SOURCE_TEXT")),
+                        c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
+                        c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
+                        c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
+                        c.getInt(c.getColumnIndex("_id")),
+                        c.getInt(c.getColumnIndex("IS_FAV"))
+                ));
+                c.moveToNext();
+            }
+            c.close();
+            populateList();
+        }
+    }
+
+    private void setupFavourites() {
+
     }
 }

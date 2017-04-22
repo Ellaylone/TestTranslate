@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private SwipeViewPager swipeViewPager;
     private SQLiteDatabase db;
+    private CategoryAdapter categoryAdapter;
 
     public SQLiteDatabase getDb() {
         return db;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupBottomNavigation() {
         swipeViewPager = (SwipeViewPager) findViewById(R.id.pager);
 
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, getSupportFragmentManager());
+        categoryAdapter = new CategoryAdapter(this, getSupportFragmentManager());
 
         swipeViewPager.setAdapter(categoryAdapter);
         swipeViewPager.setEnabled(false);

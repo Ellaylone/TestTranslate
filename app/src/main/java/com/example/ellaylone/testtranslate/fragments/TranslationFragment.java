@@ -99,6 +99,7 @@ public class TranslationFragment extends Fragment {
         storeActiveLangs(outState);
         storeSourceText(outState);
         storeTranslatedText(outState);
+        writeHistory();
     }
 
     private void storeSourceText(Bundle outState) {
@@ -235,13 +236,15 @@ public class TranslationFragment extends Fragment {
         showTranslation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                writeHistory();
+
                 Intent intent = new Intent(getActivity(), ShowTranslationActivity.class);
                 intent.putExtra(EXTRA_TRANSLATION_TO_SHOW, translatedText.get(0));
 
                 startActivity(intent);
             }
         });
-        
+
         displayTranslation();
     }
 
@@ -290,14 +293,17 @@ public class TranslationFragment extends Fragment {
         switchLangs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(translatedText != null) {
+                    writeHistory();
+                    sourceText.setText(translatedText.get(0));
+                    translatedText = null;
+                }
+
                 String temp = activeSourceLang;
                 activeSourceLang = activeTargetLang;
                 activeTargetLang = temp;
                 saveActiveLangs(activeSourceLang, activeTargetLang);
                 setupTextViews();
-
-                sourceText.setText(translatedText.get(0));
-                translatedText = null;
                 displayTranslation();
             }
         });
@@ -448,5 +454,20 @@ public class TranslationFragment extends Fragment {
 
         setupTextViews();
         setupSwitch();
+    }
+
+    private void writeHistory() {
+        if(!sourceText.getText().toString().equals("") && translatedText != null) {
+            ContentValues newValues = new ContentValues();
+
+            newValues.put("SOURCE_TEXT", sourceText.getText().toString());
+            newValues.put("TRANSLATED_TEXT", translatedText.get(0));
+            newValues.put("LANG_CODE_SOURCE", activeSourceLang);
+            newValues.put("LANG_CODE_TRANSLATION", activeTargetLang);
+
+            db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
+
+            newValues.clear();
+        }
     }
 }

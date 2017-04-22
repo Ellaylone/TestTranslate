@@ -86,4 +86,8 @@ public class ToolBarHistory extends RelativeLayout implements View.OnClickListen
     public void setOnDeleteClickListener(OnClickListener onDeleteClickListener) {
         this.onDeleteClickListener = onDeleteClickListener;
     }
+
+    public TabLayout getTabs() {
+        return tabs;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.ellaylone.testtranslate.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,9 +23,15 @@ public class HistoryAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    //TODO setup different instaces depending on position
     public Fragment getItem(int position) {
-        return HistoryFavoritesFragment.getInstance();
+
+        Fragment fragment = new HistoryFavoritesFragment();
+
+        Bundle arguments = new Bundle();
+        arguments.putBoolean("IS_HISTORY", position == 1 ? false : true);
+        fragment.setArguments(arguments);
+
+        return fragment;
     }
 
     @Override
