@@ -56,7 +56,8 @@ public class HistoryFragment extends Fragment {
         toolBar.getTabs().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                swipeViewPager.dispatchConfigurationChanged(getResources().getConfiguration());
+//                swipeViewPager.dispatchConfigurationChanged(getResources().getConfiguration());
+//                historyAdapter.notifyDataSetChanged();
             }
 
             @Override

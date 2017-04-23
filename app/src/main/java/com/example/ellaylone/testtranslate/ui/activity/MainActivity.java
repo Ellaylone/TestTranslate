@@ -1,7 +1,6 @@
 package com.example.ellaylone.testtranslate.ui.activity;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,7 +14,6 @@ import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.TranslateApp;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.CategoryAdapter;
-import com.example.ellaylone.testtranslate.db.DbProvider;
 import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 
 import java.util.ArrayList;
@@ -104,44 +102,5 @@ public class MainActivity extends AppCompatActivity {
                 catchFocus();
             }
         });
-    }
-
-    private void setupHistory() {
-        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
-        if (c.getCount() != 0) {
-            c.moveToFirst();
-            for (int i = 0; i < c.getCount(); i++) {
-                listData.add(new TranslationItem(
-                        c.getString(c.getColumnIndex("SOURCE_TEXT")),
-                        c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
-                        c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
-                        c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
-                        c.getInt(c.getColumnIndex("_id")),
-                        c.getInt(c.getColumnIndex("IS_FAV"))
-                ));
-                c.moveToNext();
-            }
-            c.close();
-        }
-    }
-
-    private void setupFavourites() {
-        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "IS_FAV=1", null, null, null, null);
-
-        if (c.getCount() != 0) {
-            c.moveToFirst();
-            for (int i = 0; i < c.getCount(); i++) {
-                listData.add(new TranslationItem(
-                        c.getString(c.getColumnIndex("SOURCE_TEXT")),
-                        c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
-                        c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
-                        c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
-                        c.getInt(c.getColumnIndex("_id")),
-                        1
-                ));
-                c.moveToNext();
-            }
-            c.close();
-        }
     }
 }

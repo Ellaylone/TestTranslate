@@ -14,11 +14,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.db.DbProvider;
-import com.example.ellaylone.testtranslate.ui.activity.MainActivity;
 import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.HistoryFavItemAdapter;
+import com.example.ellaylone.testtranslate.db.DbProvider;
+import com.example.ellaylone.testtranslate.ui.activity.MainActivity;
 
 import java.util.ArrayList;
 
