@@ -3,28 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/lang_list_item_height">
+    android:layout_height="@dimen/hisfav_item_height">
 
-    <TextView
-        android:id="@+id/source_text"
-        style="@style/LangListItemTitle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/lang_list_item_h_padding"
-        android:layout_marginStart="@dimen/lang_list_item_h_padding"
-        tools:text="Hello" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/hisfav_item_text_wrap_h_padding"
+        android:layout_marginStart="@dimen/hisfav_item_text_wrap_h_padding"
+        android:layout_marginRight="@dimen/hisfav_item_text_wrap_h_padding"
+        android:layout_marginEnd="@dimen/hisfav_item_text_wrap_h_padding"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-    <TextView
+        <TextView
+            android:id="@+id/source_text"
+            style="@style/HisFavItemSourceText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:text="Hello" />
+
+        <TextView
+            android:id="@+id/translated_text"
+            style="@style/HisFavItemTranslatedText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:text="Привет" />
+    </LinearLayout>
+
+    <ImageView
         android:id="@+id/is_favourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/hisfav_item_height"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:padding="10dp"
-        android:text="F"/>
+        android:padding="@dimen/hisfav_item_icon_padding"
+        android:src="@drawable/fav_false"/>
 
     <TextView
         android:id="@+id/translation_langs"
@@ -32,7 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/hisfav_item_langs_right_margin"
+        android:textAllCaps="true"
         tools:text="en - ru"/>
 
     <View

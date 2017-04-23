@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.R;
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 
 public class HistoryFavItemAdapter extends BaseAdapter {
     private final ArrayList mData;
+    private View.OnClickListener mOnClickListener;
 
-    public HistoryFavItemAdapter(ArrayList<TranslationItem> items) {
+    public HistoryFavItemAdapter(ArrayList<TranslationItem> items, View.OnClickListener onClickListener) {
         mData = items;
+        mOnClickListener = onClickListener;
     }
 
     @Override
@@ -52,12 +55,16 @@ public class HistoryFavItemAdapter extends BaseAdapter {
         TextView sourceText = (TextView) result.findViewById(R.id.source_text);
         sourceText.setText(item.getSourceText());
 
+        TextView translatedText = (TextView) result.findViewById(R.id.translated_text);
+        translatedText.setText(item.getTargetText());
 
         TextView translationLangs = (TextView) result.findViewById(R.id.translation_langs);
         translationLangs.setText(item.getSourceLang() + " - " + item.getTargetLang());
 
-        TextView isFavourite = (TextView) result.findViewById(R.id.is_favourite);
-        isFavourite.setVisibility(item.isFavourite() ? View.VISIBLE : View.GONE);
+        ImageView isFavourite = (ImageView) result.findViewById(R.id.is_favourite);
+        isFavourite.setImageResource(item.isFavourite() ? R.drawable.fav_true :  R.drawable.fav_false);
+//        isFavourite.setOnClickListener(mOnClickListener);
+//        isFavourite.setHint(item.getId());
 
         return result;
     }

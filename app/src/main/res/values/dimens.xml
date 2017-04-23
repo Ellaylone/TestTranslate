@@ -37,4 +37,12 @@
     <!-- Translation fullscreen -->
     <dimen name="translation_fullscreen_text_size">40sp</dimen>
 
+    <!-- History & Fav list -->
+    <dimen name="hisfav_item_height">56dp</dimen>
+    <dimen name="hisfav_item_source_text_size">16sp</dimen>
+    <dimen name="hisfav_item_translation_text_size">14sp</dimen>
+    <dimen name="hisfav_item_icon_padding">10dp</dimen>
+    <dimen name="hisfav_item_langs_right_margin">20dp</dimen>
+    <dimen name="hisfav_item_text_wrap_h_padding">80dp</dimen>
+
 </resources>

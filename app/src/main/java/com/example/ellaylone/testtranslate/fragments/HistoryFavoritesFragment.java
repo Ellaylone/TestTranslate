@@ -50,7 +50,13 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void populateList() {
-        HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData);
+        HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
+                //TODO
+            }
+        });
         listView.setAdapter(adapter);
     }
 
@@ -75,6 +81,22 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void setupFavourites() {
-
+        Cursor c = db.query(DbProvider.FAVOURITES_TABLE_NAME, null, null, null, null, null, null);
+        if (c.getCount() != 0) {
+            c.moveToFirst();
+            for (int i = 0; i < c.getCount(); i++) {
+                listData.add(new TranslationItem(
+                        c.getString(c.getColumnIndex("SOURCE_TEXT")),
+                        c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
+                        c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
+                        c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
+                        c.getInt(c.getColumnIndex("_id")),
+                        1
+                ));
+                c.moveToNext();
+            }
+            c.close();
+            populateList();
+        }
     }
 }

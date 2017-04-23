@@ -44,4 +44,16 @@
         <item name="android:height">@dimen/translate_result_icon_width</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <!-- HisFav source text -->
+    <style name="HisFavItemSourceText">
+        <item name="android:textSize">@dimen/hisfav_item_source_text_size</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+
+    <style name="HisFavItemTranslatedText">
+        <item name="android:textSize">@dimen/hisfav_item_translation_text_size</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:gravity">top</item>
+    </style>
 </resources>
