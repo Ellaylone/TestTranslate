@@ -185,7 +185,10 @@ public class TranslationFragment extends Fragment {
                 activeSourceLang = currentHistory.getSourceLang();
                 activeTargetLang = currentHistory.getTargetLang();
                 sourceText.setText(currentHistory.getSourceText());
-                translation.setText(currentHistory.getTargetText());
+                List<String> list = new ArrayList<String>();
+                list.add(currentHistory.getTargetText());
+                translatedText = list;
+                displayTranslation();
             } else {
                 updateActiveLangs();
             }
