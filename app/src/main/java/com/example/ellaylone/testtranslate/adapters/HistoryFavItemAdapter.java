@@ -54,6 +54,9 @@ public class HistoryFavItemAdapter extends BaseAdapter {
 
                 TranslationItem item = getItem(position);
 
+                TextView historyId = (TextView) result.findViewById(R.id.history_id);
+                historyId.setText(item.getId().toString());
+
                 TextView sourceText = (TextView) result.findViewById(R.id.source_text);
                 sourceText.setText(item.getSourceText());
 
@@ -65,8 +68,9 @@ public class HistoryFavItemAdapter extends BaseAdapter {
 
                 ImageView isFavourite = (ImageView) result.findViewById(R.id.is_favourite);
                 isFavourite.setImageResource(item.isFavourite() ? R.drawable.fav_true : R.drawable.fav_false);
-//        isFavourite.setOnClickListener(mOnClickListener);
-//        isFavourite.setHint(item.getId());
+
+                result.setOnClickListener(mOnClickListener);
+                isFavourite.setOnClickListener(mOnClickListener);
             }
         } else {
             result = convertView;

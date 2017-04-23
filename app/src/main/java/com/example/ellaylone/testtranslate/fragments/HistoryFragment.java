@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,7 @@ public class HistoryFragment extends Fragment {
         toolBar.hideToolbarBackIcon();
         toolBar.hideToolbarDeleteIcon();
 
-        SwipeViewPager swipeViewPager = (SwipeViewPager) view.findViewById(R.id.history_pager);
+        final SwipeViewPager swipeViewPager = (SwipeViewPager) view.findViewById(R.id.history_pager);
 
         historyAdapter = new HistoryAdapter(getContext(), getChildFragmentManager());
         swipeViewPager.setAdapter(historyAdapter);
@@ -57,18 +56,18 @@ public class HistoryFragment extends Fragment {
         toolBar.getTabs().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.v("tab", "selected");
+//                ((HistoryFavoritesFragment) historyAdapter.getItem(tab.getPosition())).;
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                Log.v("tab", "unselected");
-            }
+            public void onTabUnselected(TabLayout.Tab tab){}
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                Log.v("tab", "reselected");
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
+    }
+
+    public ToolBarHistory getToolBar() {
+        return toolBar;
     }
 }

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteException;
 
 public class TranslateApp extends Application {
     final int DATABASE_VERSION = 10;
+    private int currentHistoryId;
     private SQLiteDatabase db;
 
     @Override
@@ -30,5 +31,13 @@ public class TranslateApp extends Application {
         } catch (SQLiteException ex) {
             db = dbHelper.getReadableDatabase();
         }
+    }
+
+    public int getCurrentHistoryId() {
+        return currentHistoryId;
+    }
+
+    public void setCurrentHistoryId(int currentHistoryId) {
+        this.currentHistoryId = currentHistoryId;
     }
 }

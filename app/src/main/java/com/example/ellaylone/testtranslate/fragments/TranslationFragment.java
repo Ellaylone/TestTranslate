@@ -29,6 +29,7 @@ import com.example.ellaylone.testtranslate.ShowTranslationActivity;
 import com.example.ellaylone.testtranslate.TextArea;
 import com.example.ellaylone.testtranslate.TranslateApi;
 import com.example.ellaylone.testtranslate.TranslateProvider;
+import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.requests.GetLangsRequest;
 
 import java.util.ArrayList;
@@ -70,6 +71,8 @@ public class TranslationFragment extends Fragment {
     private String activeSourceLang;
     private String activeTargetLang;
     private List<String> translatedText;
+
+    private TranslationItem currentHistory;
 
     private SQLiteDatabase db;
     private Map<String, String> langs;
@@ -156,12 +159,15 @@ public class TranslationFragment extends Fragment {
 
         db = ((MainActivity) getActivity()).getDb();
 
+        getHistory(0);
+
         sourceLang = (TextView) view.findViewById(R.id.source_lang);
         targetLang = (TextView) view.findViewById(R.id.target_lang);
         switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
         translation = (TextView) view.findViewById(R.id.translation_result_text);
         showTranslation = (TextView) view.findViewById(R.id.show_translation);
         addFav = (TextView) view.findViewById(R.id.add_fav);
+        sourceText = (TextArea) view.findViewById(R.id.source_text_area);
 
         setupTranslationResults();
 
@@ -175,12 +181,17 @@ public class TranslationFragment extends Fragment {
             setupSwitch();
             displayTranslation();
         } else {
-            updateActiveLangs();
+            if(currentHistory != null) {
+                activeSourceLang = currentHistory.getSourceLang();
+                activeTargetLang = currentHistory.getTargetLang();
+                sourceText.setText(currentHistory.getSourceText());
+                translation.setText(currentHistory.getTargetText());
+            } else {
+                updateActiveLangs();
+            }
             updateLangs();
         }
 
-
-        sourceText = (TextArea) view.findViewById(R.id.source_text_area);
         sourceText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -361,26 +372,26 @@ public class TranslationFragment extends Fragment {
     }
 
     private void updateActiveLangs() {
-        Cursor c = db.query(DbProvider.ACTIVE_LANGS_TABLE_NAME, null, null, null, null, null, null);
-        if (c.getCount() != 0) {
-            c.moveToFirst();
-            for (int i = 0; i < c.getCount(); i++) {
-                switch (c.getInt(c.getColumnIndex("LANG_TYPE"))) {
-                    case 1:
-                        activeSourceLang = c.getString(c.getColumnIndex("LANG_CODE"));
-                        break;
-                    case 2:
-                        activeTargetLang = c.getString(c.getColumnIndex("LANG_CODE"));
-                        break;
-                    default:
-                        break;
+            Cursor c = db.query(DbProvider.ACTIVE_LANGS_TABLE_NAME, null, null, null, null, null, null);
+            if (c.getCount() != 0) {
+                c.moveToFirst();
+                for (int i = 0; i < c.getCount(); i++) {
+                    switch (c.getInt(c.getColumnIndex("LANG_TYPE"))) {
+                        case 1:
+                            activeSourceLang = c.getString(c.getColumnIndex("LANG_CODE"));
+                            break;
+                        case 2:
+                            activeTargetLang = c.getString(c.getColumnIndex("LANG_CODE"));
+                            break;
+                        default:
+                            break;
+                    }
+                    c.moveToNext();
                 }
-                c.moveToNext();
+                c.close();
+            } else {
+                updateActiveLangsList();
             }
-            c.close();
-        } else {
-            updateActiveLangsList();
-        }
     }
 
     private void updateLangs() {
@@ -458,16 +469,55 @@ public class TranslationFragment extends Fragment {
 
     private void writeHistory() {
         if(!sourceText.getText().toString().equals("") && translatedText != null) {
-            ContentValues newValues = new ContentValues();
+            if (currentHistory == null ||
+                    !currentHistory.getSourceText().equals(sourceText.getText().toString()) ||
+                    !currentHistory.getSourceLang().equals(activeSourceLang) ||
+                    !currentHistory.getTargetLang().equals(activeTargetLang)) {
+                currentHistory = new TranslationItem(
+                        sourceText.getText().toString(),
+                        translatedText.get(0),
+                        activeSourceLang,
+                        activeTargetLang,
+                        0,
+                        0
+                );
 
-            newValues.put("SOURCE_TEXT", sourceText.getText().toString());
-            newValues.put("TRANSLATED_TEXT", translatedText.get(0));
-            newValues.put("LANG_CODE_SOURCE", activeSourceLang);
-            newValues.put("LANG_CODE_TRANSLATION", activeTargetLang);
+                ContentValues newValues = new ContentValues();
 
-            db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
+                newValues.put("SOURCE_TEXT", currentHistory.getSourceText());
+                newValues.put("TRANSLATED_TEXT", currentHistory.getTargetText());
+                newValues.put("LANG_CODE_SOURCE", currentHistory.getSourceLang());
+                newValues.put("LANG_CODE_TRANSLATION", currentHistory.getTargetLang());
 
-            newValues.clear();
+                db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
+
+                newValues.clear();
+            }
+        }
+    }
+
+    private void getHistory(int id) {
+        Cursor c;
+        if(id == 0) {
+            c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
+        } else {
+            c = db.query(DbProvider.HISTORY_TABLE_NAME, new String[]{"_id"},
+                    "_id LIKE ? ",
+                    new String[]{"%" + id + "%"},
+                    null, null, null, null);
+        }
+
+        if(c.getCount() > 0) {
+            c.moveToFirst();
+            currentHistory = new TranslationItem(
+                    c.getString(c.getColumnIndex("SOURCE_TEXT")),
+                    c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
+                    c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
+                    c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
+                    c.getInt(c.getColumnIndex("_id")),
+                    c.getInt(c.getColumnIndex("IS_FAV"))
+            );
+            c.close();
         }
     }
 }

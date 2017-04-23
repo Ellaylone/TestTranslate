@@ -1,6 +1,7 @@
 package com.example.ellaylone.testtranslate.fragments;
 
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.DbProvider;
 import com.example.ellaylone.testtranslate.MainActivity;
@@ -56,8 +59,35 @@ public class HistoryFavoritesFragment extends Fragment {
         HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData, isHistory, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
-                //TODO
+                boolean isFav;
+
+                if(v.getId() == R.id.is_favourite) {
+                    View parent = (View) v.getParent();
+                    TextView historyId = (TextView) parent.findViewById(R.id.history_id);
+
+                    int id = Integer.parseInt(historyId.getText().toString());
+
+                    Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + id, null, null, null, null);
+
+                    if(c.getCount() > 0) {
+                        c.moveToFirst();
+                        isFav = c.getInt(c.getColumnIndex("IS_FAV")) == 1;
+                        isFav = !isFav;
+
+                        ImageView isFavourite = (ImageView) v.findViewById(R.id.is_favourite);
+                        isFavourite.setImageResource(isFav ? R.drawable.fav_true : R.drawable.fav_false);
+
+                        ContentValues updatedValues = new ContentValues();
+
+                        updatedValues.put("IS_FAV", isFav);
+                        String where = "_id=" + id;
+
+                        db.update(DbProvider.HISTORY_TABLE_NAME, updatedValues, where, null);
+                    }
+                } else {
+                    //TODO show in translation fragment
+                    TextView historyId = (TextView) v.findViewById(R.id.history_id);
+                }
             }
         });
         listView.setAdapter(adapter);
@@ -84,7 +114,8 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void setupFavourites() {
-        Cursor c = db.query(DbProvider.FAVOURITES_TABLE_NAME, null, null, null, null, null, null);
+        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "IS_FAV=1", null, null, null, null);
+
         if (c.getCount() != 0) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
