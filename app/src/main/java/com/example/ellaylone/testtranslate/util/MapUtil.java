@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.util;
 
 import java.util.Collections;
 import java.util.Comparator;

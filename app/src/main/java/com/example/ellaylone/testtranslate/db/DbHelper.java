@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

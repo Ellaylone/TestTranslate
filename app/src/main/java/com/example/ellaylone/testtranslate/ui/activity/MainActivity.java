@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.ui.activity;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
+import com.example.ellaylone.testtranslate.TranslateApp;
 import com.example.ellaylone.testtranslate.adapters.CategoryAdapter;
 
 public class MainActivity extends AppCompatActivity {

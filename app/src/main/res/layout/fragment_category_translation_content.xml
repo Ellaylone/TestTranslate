@@ -7,7 +7,7 @@
 
     <include layout="@layout/translate_toolbar_layout" />
 
-    <com.example.ellaylone.testtranslate.TextAreaWrap
+    <com.example.ellaylone.testtranslate.ui.view.TextAreaWrap
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/source_text_area_margin" />

@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context="com.example.ellaylone.testtranslate.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
-    <com.example.ellaylone.testtranslate.SwipeViewPager
+    <com.example.ellaylone.testtranslate.viewPager.SwipeViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

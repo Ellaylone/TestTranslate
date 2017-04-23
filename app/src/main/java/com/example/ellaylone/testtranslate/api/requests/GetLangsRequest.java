@@ -1,9 +1,8 @@
-package com.example.ellaylone.testtranslate.requests;
+package com.example.ellaylone.testtranslate.api.requests;
 
-import com.example.ellaylone.testtranslate.GetLangList;
-import com.example.ellaylone.testtranslate.TranslateApi;
-import com.example.ellaylone.testtranslate.TranslateProvider;
-import com.example.ellaylone.testtranslate.requests.IRequest;
+import com.example.ellaylone.testtranslate.api.TranslateApi;
+import com.example.ellaylone.testtranslate.api.providers.TranslateProvider;
+import com.example.ellaylone.testtranslate.api.get.GetLangList;
 
 import retrofit2.Call;
 

@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate.fragments;
+package com.example.ellaylone.testtranslate.ui.fragments;
 
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.DbProvider;
-import com.example.ellaylone.testtranslate.MapUtil;
+import com.example.ellaylone.testtranslate.db.DbProvider;
+import com.example.ellaylone.testtranslate.util.MapUtil;
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.SelectLangActivity;
+import com.example.ellaylone.testtranslate.ui.activity.SelectLangActivity;
 import com.example.ellaylone.testtranslate.adapters.LangsAdapter;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate.requests;
+package com.example.ellaylone.testtranslate.api.requests;
 
 import retrofit2.Call;
 

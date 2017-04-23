@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.api.get;
 
 import android.support.annotation.Nullable;
 

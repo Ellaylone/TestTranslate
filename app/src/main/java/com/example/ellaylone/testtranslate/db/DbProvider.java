@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.db;
 
 /**
  * Created by ellaylone on 20.04.17.

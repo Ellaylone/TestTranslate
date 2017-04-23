@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.SwipeViewPager;
+import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 
 /**
  * Created by ellaylone on 18.04.17.

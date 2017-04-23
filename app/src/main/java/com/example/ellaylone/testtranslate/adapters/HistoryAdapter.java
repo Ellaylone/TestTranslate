@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.fragments.HistoryFavoritesFragment;
+import com.example.ellaylone.testtranslate.ui.fragments.HistoryFavoritesFragment;
 
 /**
  * Created by ellaylone on 16.04.17.

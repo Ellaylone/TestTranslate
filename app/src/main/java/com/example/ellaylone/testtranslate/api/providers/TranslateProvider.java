@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.api.providers;
 
 /**
  * Created by ellaylone on 17.04.17.

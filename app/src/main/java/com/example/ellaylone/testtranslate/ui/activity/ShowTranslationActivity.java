@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.ui.fragments.TranslationFragment;
 
 public class ShowTranslationActivity extends AppCompatActivity {
 

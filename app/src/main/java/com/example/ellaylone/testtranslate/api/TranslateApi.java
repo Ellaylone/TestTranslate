@@ -1,4 +1,7 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.api;
+
+import com.example.ellaylone.testtranslate.api.get.GetLangList;
+import com.example.ellaylone.testtranslate.api.get.GetTranslation;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

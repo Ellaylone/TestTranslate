@@ -5,7 +5,7 @@
     android:focusableInTouchMode="true"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.example.ellaylone.testtranslate.TextArea
+    <com.example.ellaylone.testtranslate.ui.view.TextArea
         android:id="@+id/source_text_area"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ellaylone.testtranslate.SelectLangActivity">
+    tools:context=".ui.activity.SelectLangActivity">
 
     <com.example.ellaylone.testtranslate.toolbar.ToolBarSimple
         android:id="@+id/toolbar"

@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate.fragments;
+package com.example.ellaylone.testtranslate.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.SwipeViewPager;
+import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 import com.example.ellaylone.testtranslate.adapters.HistoryAdapter;
 import com.example.ellaylone.testtranslate.toolbar.ToolBarHistory;
 

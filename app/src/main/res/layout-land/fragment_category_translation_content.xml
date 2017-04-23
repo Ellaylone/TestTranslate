@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <com.example.ellaylone.testtranslate.TextAreaWrap
+        <com.example.ellaylone.testtranslate.ui.view.TextAreaWrap
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"

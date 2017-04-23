@@ -1,10 +1,12 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.ui.view;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import com.example.ellaylone.testtranslate.R;
 
 /**
  * Created by ellaylone on 18.04.17.

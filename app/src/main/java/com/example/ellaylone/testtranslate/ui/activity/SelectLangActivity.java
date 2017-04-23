@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.ui.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -9,8 +9,10 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.ellaylone.testtranslate.fragments.LangListFragment;
-import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.TranslateApp;
+import com.example.ellaylone.testtranslate.ui.fragments.LangListFragment;
+import com.example.ellaylone.testtranslate.ui.fragments.TranslationFragment;
 import com.example.ellaylone.testtranslate.toolbar.ToolBarSimple;
 
 import java.util.ArrayList;

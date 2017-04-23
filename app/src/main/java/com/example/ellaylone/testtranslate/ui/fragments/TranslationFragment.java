@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate.fragments;
+package com.example.ellaylone.testtranslate.ui.fragments;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -18,19 +18,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.DbProvider;
-import com.example.ellaylone.testtranslate.GetLangList;
-import com.example.ellaylone.testtranslate.GetTranslation;
-import com.example.ellaylone.testtranslate.GetTranslationRequest;
-import com.example.ellaylone.testtranslate.MainActivity;
+import com.example.ellaylone.testtranslate.db.DbProvider;
+import com.example.ellaylone.testtranslate.api.get.GetLangList;
+import com.example.ellaylone.testtranslate.api.get.GetTranslation;
+import com.example.ellaylone.testtranslate.api.requests.GetTranslationRequest;
+import com.example.ellaylone.testtranslate.ui.activity.MainActivity;
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.SelectLangActivity;
-import com.example.ellaylone.testtranslate.ShowTranslationActivity;
-import com.example.ellaylone.testtranslate.TextArea;
-import com.example.ellaylone.testtranslate.TranslateApi;
-import com.example.ellaylone.testtranslate.TranslateProvider;
+import com.example.ellaylone.testtranslate.ui.activity.SelectLangActivity;
+import com.example.ellaylone.testtranslate.ui.activity.ShowTranslationActivity;
+import com.example.ellaylone.testtranslate.ui.view.TextArea;
+import com.example.ellaylone.testtranslate.api.TranslateApi;
+import com.example.ellaylone.testtranslate.api.providers.TranslateProvider;
 import com.example.ellaylone.testtranslate.TranslationItem;
-import com.example.ellaylone.testtranslate.requests.GetLangsRequest;
+import com.example.ellaylone.testtranslate.api.requests.GetLangsRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;

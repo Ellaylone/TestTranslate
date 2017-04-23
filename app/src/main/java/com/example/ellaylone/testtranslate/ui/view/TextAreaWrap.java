@@ -1,9 +1,11 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
+
+import com.example.ellaylone.testtranslate.R;
 
 /**
  * Created by ellaylone on 18.04.17.

@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.fragments.HistoryFragment;
-import com.example.ellaylone.testtranslate.fragments.SettingsFragment;
-import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
+import com.example.ellaylone.testtranslate.ui.fragments.HistoryFragment;
+import com.example.ellaylone.testtranslate.ui.fragments.SettingsFragment;
+import com.example.ellaylone.testtranslate.ui.fragments.TranslationFragment;
 
 /**
  * Created by ellaylone on 16.04.17.
@@ -16,7 +16,7 @@ import com.example.ellaylone.testtranslate.fragments.TranslationFragment;
 
 public class CategoryAdapter extends FragmentPagerAdapter {
 
-    private final int TABS_COUNT = 3;
+    private final int TABS_COUNT = 2;
     private Context mContext;
 
     public CategoryAdapter(Context context, FragmentManager fm) {

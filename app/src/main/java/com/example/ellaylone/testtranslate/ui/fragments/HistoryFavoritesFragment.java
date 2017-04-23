@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate.fragments;
+package com.example.ellaylone.testtranslate.ui.fragments;
 
 
 import android.content.ContentValues;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.DbProvider;
-import com.example.ellaylone.testtranslate.MainActivity;
+import com.example.ellaylone.testtranslate.db.DbProvider;
+import com.example.ellaylone.testtranslate.ui.activity.MainActivity;
 import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.HistoryFavItemAdapter;

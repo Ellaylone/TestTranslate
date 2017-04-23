@@ -1,4 +1,4 @@
-package com.example.ellaylone.testtranslate;
+package com.example.ellaylone.testtranslate.viewPager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

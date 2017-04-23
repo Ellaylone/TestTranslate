@@ -4,6 +4,8 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
+import com.example.ellaylone.testtranslate.db.DbHelper;
+
 /**
  * Created by ellaylone on 19.04.17.
  */
