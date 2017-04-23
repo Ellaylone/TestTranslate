@@ -27,6 +27,7 @@ import java.util.Map;
 
 public class LangListFragment extends Fragment {
     private Map<String, String> langs;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

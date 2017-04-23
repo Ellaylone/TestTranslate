@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class LangsAdapter extends BaseAdapter {
     private final ArrayList mData;
-    private String activeLanguage;
     View.OnClickListener onLangClickListener;
+    private String activeLanguage;
 
     public LangsAdapter(Map<String, String> map, String activeLanguage, View.OnClickListener onLangClickListener) {
         mData = new ArrayList();

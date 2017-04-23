@@ -13,12 +13,10 @@ import com.example.ellaylone.testtranslate.R;
  */
 
 public class TextArea extends AppCompatEditText {
+    static final int MIN_DISTANCE = 150;
     private Context mContext;
     private boolean hasFocus;
-
     private float x1, x2;
-    static final int MIN_DISTANCE = 150;
-
     private String sourceBackup = "";
 
     public TextArea(Context context) {
@@ -58,17 +56,15 @@ public class TextArea extends AppCompatEditText {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch(event.getAction())
-        {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();
                 break;
             case MotionEvent.ACTION_UP:
                 x2 = event.getX();
                 float deltaX = x2 - x1;
-                if (Math.abs(deltaX) > MIN_DISTANCE)
-                {
-                    if(this.getText().toString().equals("")) {
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    if (this.getText().toString().equals("")) {
                         this.setText(sourceBackup);
                         sourceBackup = "";
                     } else {

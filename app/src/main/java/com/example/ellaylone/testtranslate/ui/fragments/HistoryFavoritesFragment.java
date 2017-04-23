@@ -43,7 +43,7 @@ public class HistoryFavoritesFragment extends Fragment {
 
         isHistory = getArguments().getBoolean("IS_HISTORY");
 
-        if(isHistory) {
+        if (isHistory) {
             setupHistory();
         } else {
             setupFavourites();
@@ -53,7 +53,7 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void populateList() {
-        if(listData.size() == 0) {
+        if (listData.size() == 0) {
             listData.add(new TranslationItem(null, null, null, null, null, 0));
         }
         HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData, isHistory, new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class HistoryFavoritesFragment extends Fragment {
             public void onClick(View v) {
                 boolean isFav;
 
-                if(v.getId() == R.id.is_favourite) {
+                if (v.getId() == R.id.is_favourite) {
                     View parent = (View) v.getParent();
                     TextView historyId = (TextView) parent.findViewById(R.id.history_id);
 
@@ -69,7 +69,7 @@ public class HistoryFavoritesFragment extends Fragment {
 
                     Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + id, null, null, null, null);
 
-                    if(c.getCount() > 0) {
+                    if (c.getCount() > 0) {
                         c.moveToFirst();
                         isFav = c.getInt(c.getColumnIndex("IS_FAV")) == 1;
                         isFav = !isFav;
