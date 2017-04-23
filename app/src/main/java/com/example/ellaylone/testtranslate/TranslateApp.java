@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteException;
  */
 
 public class TranslateApp extends Application {
-    final int DATABASE_VERSION = 9;
+    final int DATABASE_VERSION = 10;
     private SQLiteDatabase db;
 
     @Override

@@ -50,7 +50,10 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void populateList() {
-        HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData, new View.OnClickListener() {
+        if(listData.size() == 0) {
+            listData.add(new TranslationItem(null, null, null, null, null, 0));
+        }
+        HistoryFavItemAdapter adapter = new HistoryFavItemAdapter(listData, isHistory, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
@@ -76,8 +79,8 @@ public class HistoryFavoritesFragment extends Fragment {
                 c.moveToNext();
             }
             c.close();
-            populateList();
         }
+        populateList();
     }
 
     private void setupFavourites() {
@@ -96,7 +99,7 @@ public class HistoryFavoritesFragment extends Fragment {
                 c.moveToNext();
             }
             c.close();
-            populateList();
         }
+        populateList();
     }
 }

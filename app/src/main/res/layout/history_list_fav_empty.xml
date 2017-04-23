@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+    android:id="@+id/empty"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingTop="40dp"
+    >
+
+    <ImageView
+        android:id="@+id/history_empty_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/fav_empty"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/history_empty_icon"
+        android:text="@string/fav_list_empty"/>
+
+    </RelativeLayout>

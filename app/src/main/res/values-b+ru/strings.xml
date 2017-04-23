@@ -10,4 +10,8 @@
     <!-- language select titles -->
     <string name="lang_select_source">Язык текста</string>
     <string name="lang_select_target">Язык перевода</string>
+
+    <!-- Empty favhistory list -->
+    <string name="history_list_empty">Нет переводов в истории</string>
+    <string name="fav_list_empty">Нет переводов в избранном</string>
 </resources>

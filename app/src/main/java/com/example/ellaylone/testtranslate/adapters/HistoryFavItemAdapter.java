@@ -18,11 +18,13 @@ import java.util.ArrayList;
 
 public class HistoryFavItemAdapter extends BaseAdapter {
     private final ArrayList mData;
+    private boolean mIsHistory;
     private View.OnClickListener mOnClickListener;
 
-    public HistoryFavItemAdapter(ArrayList<TranslationItem> items, View.OnClickListener onClickListener) {
+    public HistoryFavItemAdapter(ArrayList<TranslationItem> items, boolean isHistory, View.OnClickListener onClickListener) {
         mData = items;
         mOnClickListener = onClickListener;
+        mIsHistory = isHistory;
     }
 
     @Override
@@ -45,27 +47,30 @@ public class HistoryFavItemAdapter extends BaseAdapter {
         final View result;
 
         if (convertView == null) {
-            result = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_list_item, parent, false);
+            if (mData.size() == 1 && getItem(0).getSourceText() == null) {
+                result = LayoutInflater.from(parent.getContext()).inflate(mIsHistory ? R.layout.history_list_hist_empty : R.layout.history_list_fav_empty, parent, false);
+            } else {
+                result = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_list_item, parent, false);
+
+                TranslationItem item = getItem(position);
+
+                TextView sourceText = (TextView) result.findViewById(R.id.source_text);
+                sourceText.setText(item.getSourceText());
+
+                TextView translatedText = (TextView) result.findViewById(R.id.translated_text);
+                translatedText.setText(item.getTargetText());
+
+                TextView translationLangs = (TextView) result.findViewById(R.id.translation_langs);
+                translationLangs.setText(item.getSourceLang() + " - " + item.getTargetLang());
+
+                ImageView isFavourite = (ImageView) result.findViewById(R.id.is_favourite);
+                isFavourite.setImageResource(item.isFavourite() ? R.drawable.fav_true : R.drawable.fav_false);
+//        isFavourite.setOnClickListener(mOnClickListener);
+//        isFavourite.setHint(item.getId());
+            }
         } else {
             result = convertView;
         }
-
-        TranslationItem item = getItem(position);
-
-        TextView sourceText = (TextView) result.findViewById(R.id.source_text);
-        sourceText.setText(item.getSourceText());
-
-        TextView translatedText = (TextView) result.findViewById(R.id.translated_text);
-        translatedText.setText(item.getTargetText());
-
-        TextView translationLangs = (TextView) result.findViewById(R.id.translation_langs);
-        translationLangs.setText(item.getSourceLang() + " - " + item.getTargetLang());
-
-        ImageView isFavourite = (ImageView) result.findViewById(R.id.is_favourite);
-        isFavourite.setImageResource(item.isFavourite() ? R.drawable.fav_true :  R.drawable.fav_false);
-//        isFavourite.setOnClickListener(mOnClickListener);
-//        isFavourite.setHint(item.getId());
-
         return result;
     }
 }
