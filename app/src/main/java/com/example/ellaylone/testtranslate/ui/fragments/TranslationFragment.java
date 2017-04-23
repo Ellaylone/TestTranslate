@@ -66,8 +66,8 @@ public class TranslationFragment extends Fragment {
     private TextView targetLang;
     private TextView translation;
     private TextArea sourceText;
-    private TextView showTranslation;
-    private TextView addFav;
+    private ImageView showTranslation;
+    private ImageView addFav;
     private String activeSourceLang;
     private String activeTargetLang;
     private List<String> translatedText;
@@ -165,8 +165,8 @@ public class TranslationFragment extends Fragment {
         targetLang = (TextView) view.findViewById(R.id.target_lang);
         switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
         translation = (TextView) view.findViewById(R.id.translation_result_text);
-        showTranslation = (TextView) view.findViewById(R.id.show_translation);
-        addFav = (TextView) view.findViewById(R.id.add_fav);
+        showTranslation = (ImageView) view.findViewById(R.id.show_translation);
+        addFav = (ImageView) view.findViewById(R.id.add_fav);
         sourceText = (TextArea) view.findViewById(R.id.source_text_area);
 
         setupTranslationResults();

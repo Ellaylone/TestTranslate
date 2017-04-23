@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ellaylone.testtranslate.R;
-import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 import com.example.ellaylone.testtranslate.adapters.HistoryAdapter;
 import com.example.ellaylone.testtranslate.toolbar.ToolBarHistory;
+import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 
 /**
  * Created by ellaylone on 16.04.17.
@@ -56,16 +56,14 @@ public class HistoryFragment extends Fragment {
         toolBar.getTabs().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                ((HistoryFavoritesFragment) historyAdapter.getItem(tab.getPosition())).;
+                swipeViewPager.dispatchConfigurationChanged(getResources().getConfiguration());
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 

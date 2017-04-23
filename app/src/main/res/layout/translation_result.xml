@@ -14,26 +14,34 @@
         style="@style/TranslateResult"
         tools:text="привет мир" />
 
-    <TextView
+    <ImageView
         android:id="@+id/add_fav"
         style="@style/TranslateResultIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/translate_result_icon_width"
+        android:layout_height="@dimen/translate_result_icon_height"
+        android:padding="@dimen/translate_result_padding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="F"
+        android:layout_marginTop="@dimen/translate_result_icon_v_margin"
+        android:layout_marginBottom="@dimen/translate_result_icon_v_margin"
+        android:layout_marginRight="@dimen/translate_result_icon_h_margin"
+        android:layout_marginEnd="@dimen/translate_result_icon_h_margin"
+        android:src="@drawable/fav_false"
         tools:text="F" />
 
-    <TextView
+    <ImageView
         android:id="@+id/show_translation"
         style="@style/TranslateResultIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/translate_result_icon_width"
+        android:layout_height="@dimen/translate_result_icon_height"
+        android:padding="@dimen/translate_result_padding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/add_fav"
-        android:layout_marginTop="@dimen/translate_result_icon_margin"
-        android:text="S"
+        android:layout_marginTop="@dimen/translate_result_icon_v_margin"
+        android:layout_marginRight="@dimen/translate_result_icon_h_margin"
+        android:layout_marginEnd="@dimen/translate_result_icon_h_margin"
+        android:src="@drawable/fullscreen"
         tools:text="S" />
 
 </RelativeLayout>
