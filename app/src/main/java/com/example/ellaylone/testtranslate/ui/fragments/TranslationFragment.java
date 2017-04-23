@@ -18,19 +18,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ellaylone.testtranslate.db.DbProvider;
+import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.TranslateApp;
+import com.example.ellaylone.testtranslate.TranslationItem;
+import com.example.ellaylone.testtranslate.api.TranslateApi;
 import com.example.ellaylone.testtranslate.api.get.GetLangList;
 import com.example.ellaylone.testtranslate.api.get.GetTranslation;
+import com.example.ellaylone.testtranslate.api.providers.TranslateProvider;
+import com.example.ellaylone.testtranslate.api.requests.GetLangsRequest;
 import com.example.ellaylone.testtranslate.api.requests.GetTranslationRequest;
+import com.example.ellaylone.testtranslate.db.DbProvider;
 import com.example.ellaylone.testtranslate.ui.activity.MainActivity;
-import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.ui.activity.SelectLangActivity;
 import com.example.ellaylone.testtranslate.ui.activity.ShowTranslationActivity;
 import com.example.ellaylone.testtranslate.ui.view.TextArea;
-import com.example.ellaylone.testtranslate.api.TranslateApi;
-import com.example.ellaylone.testtranslate.api.providers.TranslateProvider;
-import com.example.ellaylone.testtranslate.TranslationItem;
-import com.example.ellaylone.testtranslate.api.requests.GetLangsRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +73,9 @@ public class TranslationFragment extends Fragment {
     private String activeTargetLang;
     private List<String> translatedText;
 
+    TranslateApp translateApp;
     private TranslationItem currentHistory;
+    private boolean isCurrentHistoryLoaded;
 
     private SQLiteDatabase db;
     private Map<String, String> langs;
@@ -159,8 +162,6 @@ public class TranslationFragment extends Fragment {
 
         db = ((MainActivity) getActivity()).getDb();
 
-        getHistory(0);
-
         sourceLang = (TextView) view.findViewById(R.id.source_lang);
         targetLang = (TextView) view.findViewById(R.id.target_lang);
         switchLangs = (ImageView) view.findViewById(R.id.switch_langs);
@@ -170,30 +171,6 @@ public class TranslationFragment extends Fragment {
         sourceText = (TextArea) view.findViewById(R.id.source_text_area);
 
         setupTranslationResults();
-
-        if (savedInstanceState != null) {
-            restoreLangs(savedInstanceState);
-            restoreActiveLangs(savedInstanceState);
-            restoreSourceText(savedInstanceState);
-            restoreTranslatedText(savedInstanceState);
-
-            setupTextViews();
-            setupSwitch();
-            displayTranslation();
-        } else {
-            if (currentHistory != null) {
-                activeSourceLang = currentHistory.getSourceLang();
-                activeTargetLang = currentHistory.getTargetLang();
-                sourceText.setText(currentHistory.getSourceText());
-                List<String> list = new ArrayList<String>();
-                list.add(currentHistory.getTargetText());
-                translatedText = list;
-                displayTranslation();
-            } else {
-                updateActiveLangs();
-            }
-            updateLangs();
-        }
 
         sourceText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -211,6 +188,7 @@ public class TranslationFragment extends Fragment {
                 }
             }
         });
+
         sourceText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -235,6 +213,42 @@ public class TranslationFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
+        if (savedInstanceState != null) {
+            restoreLangs(savedInstanceState);
+            restoreActiveLangs(savedInstanceState);
+            restoreSourceText(savedInstanceState);
+            restoreTranslatedText(savedInstanceState);
+
+            setupTextViews();
+            setupSwitch();
+            displayTranslation();
+        } else {
+            translateApp = (TranslateApp) ((MainActivity) getActivity()).getApplicationContext();
+            currentHistory = translateApp.getCurrentHistory();
+            isCurrentHistoryLoaded = translateApp.isCurrentHistoryLoaded();
+
+            if (currentHistory != null) {
+                if(!isCurrentHistoryLoaded) {
+                    activeSourceLang = currentHistory.getSourceLang();
+                    activeTargetLang = currentHistory.getTargetLang();
+                    translateApp.setCurrentHistoryLoaded(true);
+                } else {
+                    updateActiveLangs();
+                }
+                sourceText.setText(currentHistory.getSourceText());
+                if(!activeSourceLang.equals(currentHistory.getSourceLang()) || !activeTargetLang.equals(currentHistory.getTargetLang())){
+                    List<String> list = new ArrayList<String>();
+                    list.add(currentHistory.getTargetText());
+                    translatedText = list;
+                    displayTranslation();
+                }
+            } else {
+                updateActiveLangs();
+            }
+            updateLangs();
+        }
 
         return view;
     }
@@ -295,10 +309,30 @@ public class TranslationFragment extends Fragment {
 
         if (translatedText != null) {
             resultText = translatedText.get(0);
+            addFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + currentHistory.getId(), null, null, null, null);
+
+                    currentHistory.setFavourite(!currentHistory.isFavourite());
+                    
+                    if (c.getCount() > 0) {
+                        c.moveToFirst();
+
+                        ContentValues updatedValues = new ContentValues();
+
+                        updatedValues.put("IS_FAV", currentHistory.isFavourite());
+                        String where = "_id=" + currentHistory.getId();
+
+                        db.update(DbProvider.HISTORY_TABLE_NAME, updatedValues, where, null);
+                    }
+                }
+            });
         }
 
         showTranslation.setVisibility(translatedText == null ? View.GONE : View.VISIBLE);
         addFav.setVisibility(translatedText == null ? View.GONE : View.VISIBLE);
+        addFav.setImageResource(currentHistory != null && currentHistory.isFavourite() ? R.drawable.fav_true : R.drawable.fav_false);
 
         translation.setText(resultText);
     }
@@ -496,31 +530,6 @@ public class TranslationFragment extends Fragment {
 
                 newValues.clear();
             }
-        }
-    }
-
-    private void getHistory(int id) {
-        Cursor c;
-        if (id == 0) {
-            c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
-        } else {
-            c = db.query(DbProvider.HISTORY_TABLE_NAME, new String[]{"_id"},
-                    "_id LIKE ? ",
-                    new String[]{"%" + id + "%"},
-                    null, null, null, null);
-        }
-
-        if (c.getCount() > 0) {
-            c.moveToFirst();
-            currentHistory = new TranslationItem(
-                    c.getString(c.getColumnIndex("SOURCE_TEXT")),
-                    c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
-                    c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
-                    c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
-                    c.getInt(c.getColumnIndex("_id")),
-                    c.getInt(c.getColumnIndex("IS_FAV"))
-            );
-            c.close();
         }
     }
 }

@@ -94,7 +94,7 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void setupHistory() {
-        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, null);
+        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", null);
         if (c.getCount() != 0) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
@@ -114,7 +114,7 @@ public class HistoryFavoritesFragment extends Fragment {
     }
 
     private void setupFavourites() {
-        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "IS_FAV=1", null, null, null, null);
+        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "IS_FAV=1", null, null, null, "_id DESC", null);
 
         if (c.getCount() != 0) {
             c.moveToFirst();
