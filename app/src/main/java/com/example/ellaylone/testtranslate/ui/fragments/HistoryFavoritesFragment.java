@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ellaylone.testtranslate.R;
+import com.example.ellaylone.testtranslate.TranslateApp;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.HistoryFavItemAdapter;
 import com.example.ellaylone.testtranslate.db.DbProvider;
@@ -86,7 +87,16 @@ public class HistoryFavoritesFragment extends Fragment {
                     }
                 } else {
                     //TODO show in translation fragment
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    TranslateApp translateApp = (TranslateApp) mainActivity.getApplicationContext();
+
                     TextView historyId = (TextView) v.findViewById(R.id.history_id);
+
+                    translateApp.setCurrentHistoryId(Integer.parseInt(historyId.getText().toString()));
+
+                    translateApp.updateHistory();
+
+                    mainActivity.moveToTranslation();
                 }
             }
         });

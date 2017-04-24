@@ -198,11 +198,15 @@ public class TranslationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 final String newText = s.toString();
+
                 handler.removeCallbacks(runnable);
 
                 runnable = new Runnable() {
                     @Override
                     public void run() {
+                        if(translateApp.getCurrentHistoryId() != 0 && newText != currentHistory.getSourceText()) {
+                            translateApp.setCurrentHistoryId(0);
+                        }
                         getTranslation(newText);
                     }
                 };
@@ -523,7 +527,12 @@ public class TranslationFragment extends Fragment {
                         0
                 );
 
-                Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
+                Cursor c;
+                if(translateApp.getCurrentHistoryId() == 0) {
+                    c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
+                } else {
+                    c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + translateApp.getCurrentHistoryId(), null, null, null, null, "1");
+                }
 
                 boolean insert = false;
 

@@ -17,6 +17,7 @@ public class TranslateApp extends Application {
     final int DATABASE_VERSION = 10;
     private SQLiteDatabase db;
     private TranslationItem currentHistory;
+    private int currentHistoryId = 0;
     private boolean isCurrentHistoryLoaded = false;
 
     @Override
@@ -45,7 +46,12 @@ public class TranslateApp extends Application {
     }
 
     public void updateHistory() {
-        Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
+        Cursor c;
+        if(currentHistoryId == 0) {
+            c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
+        } else {
+            c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + currentHistoryId, null, null, null, null, "1");
+        }
 
         if (c.getCount() > 0) {
             c.moveToFirst();
@@ -71,5 +77,13 @@ public class TranslateApp extends Application {
 
     public void setCurrentHistoryLoaded(boolean currentHistoryLoaded) {
         isCurrentHistoryLoaded = currentHistoryLoaded;
+    }
+
+    public int getCurrentHistoryId() {
+        return currentHistoryId;
+    }
+
+    public void setCurrentHistoryId(int currentHistoryId) {
+        this.currentHistoryId = currentHistoryId;
     }
 }

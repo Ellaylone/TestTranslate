@@ -106,4 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void moveToTranslation() {
+        tabLayout.getTabAt(0).select();
+    }
 }
