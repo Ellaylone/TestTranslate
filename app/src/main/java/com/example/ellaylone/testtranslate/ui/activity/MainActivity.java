@@ -14,6 +14,7 @@ import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.TranslateApp;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.CategoryAdapter;
+import com.example.ellaylone.testtranslate.ui.fragments.HistoryFragment;
 import com.example.ellaylone.testtranslate.ui.fragments.TranslationFragment;
 import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 
@@ -94,14 +95,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 catchFocus();
-                if(tab.getPosition() == 0) {
-                    TranslationFragment frag = (TranslationFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + tab.getPosition());
-frag.loadCurrentHistory();
+
+                TranslationFragment translationFragment = (TranslationFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + 0);
+                switch (tab.getPosition()) {
+                    case 0:
+                        translationFragment.loadCurrentHistory();
+                        break;
+                    case 1:
+                        translationFragment.writeHistory();
+                        HistoryFragment historyFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + tab.getPosition());
+                        historyFragment.loadCurrentHistory();
+                        break;
+                    default:
+                        break;
                 }
-//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.detach(frag);
-//                ft.attach(frag);
-//                ft.commit();
             }
 
             @Override

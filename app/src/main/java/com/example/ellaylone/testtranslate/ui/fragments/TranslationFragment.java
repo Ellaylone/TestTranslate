@@ -251,26 +251,20 @@ public class TranslationFragment extends Fragment {
             }
 
             sourceText.setText(currentHistory.getSourceText());
-//
-//            if(!activeSourceLang.equals(currentHistory.getSourceLang()) || !activeTargetLang.equals(currentHistory.getTargetLang())){
-//                List<String> list = new ArrayList<String>();
-//                list.add(currentHistory.getTargetText());
-//                translatedText = list;
-//                displayTranslation();
-//            }
+
+            if(!activeSourceLang.equals(currentHistory.getSourceLang()) || !activeTargetLang.equals(currentHistory.getTargetLang())){
+                List<String> list = new ArrayList<String>();
+                list.add(currentHistory.getTargetText());
+                translatedText = list;
+            }
+
+            displayTranslation();
         } else {
             updateActiveLangs();
         }
     }
 
     private void setupTranslationResults() {
-        addFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         showTranslation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -322,6 +316,9 @@ public class TranslationFragment extends Fragment {
             addFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(currentHistory == null) {
+                        writeHistory();
+                    }
                     Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + currentHistory.getId(), null, null, null, null);
 
                     currentHistory.setFavourite(!currentHistory.isFavourite());
@@ -516,7 +513,7 @@ public class TranslationFragment extends Fragment {
         setupSwitch();
     }
 
-    private void writeHistory() {
+    public void writeHistory() {
         if (!sourceText.getText().toString().equals("") && translatedText != null) {
             if (currentHistory == null ||
                     !currentHistory.getSourceText().equals(sourceText.getText().toString()) ||
@@ -574,6 +571,12 @@ public class TranslationFragment extends Fragment {
                     db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
 
                     newValues.clear();
+
+                    if(prevHistory != null) {
+                        currentHistory.setId(prevHistory.getId() + 1);
+                    } else {
+                        currentHistory.setId(1);
+                    }
                 }
             }
         }

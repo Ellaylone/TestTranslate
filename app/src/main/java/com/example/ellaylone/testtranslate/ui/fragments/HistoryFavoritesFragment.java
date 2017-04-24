@@ -38,20 +38,23 @@ public class HistoryFavoritesFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.history_list, container, false);
 
-
         listView = (ListView) rootView.findViewById(R.id.list);
 
         db = ((MainActivity) getActivity()).getDb();
 
         isHistory = getArguments().getBoolean("IS_HISTORY");
 
+        reload();
+
+        return rootView;
+    }
+
+    public void reload() {
         if (isHistory) {
             setupHistory();
         } else {
             setupFavourites();
         }
-
-        return rootView;
     }
 
     private void populateList() {
@@ -87,7 +90,6 @@ public class HistoryFavoritesFragment extends Fragment {
                         db.update(DbProvider.HISTORY_TABLE_NAME, updatedValues, where, null);
                     }
                 } else {
-                    //TODO show in translation fragment
                     MainActivity mainActivity = (MainActivity) getActivity();
                     TranslateApp translateApp = (TranslateApp) mainActivity.getApplicationContext();
 
@@ -107,6 +109,9 @@ public class HistoryFavoritesFragment extends Fragment {
 
     private void setupHistory() {
         Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", null);
+
+        listData.clear();
+
         if (c.getCount() != 0) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
@@ -127,6 +132,8 @@ public class HistoryFavoritesFragment extends Fragment {
 
     private void setupFavourites() {
         Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "IS_FAV=1", null, null, null, "_id DESC", null);
+
+        listData.clear();
 
         if (c.getCount() != 0) {
             c.moveToFirst();

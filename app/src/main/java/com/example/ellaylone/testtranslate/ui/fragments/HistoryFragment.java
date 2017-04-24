@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,11 @@ public class HistoryFragment extends Fragment {
         toolBar.getTabs().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                swipeViewPager.dispatchConfigurationChanged(getResources().getConfiguration());
-//                historyAdapter.notifyDataSetChanged();
+                HistoryFavoritesFragment historyFavoritesFragment = (HistoryFavoritesFragment) getChildFragmentManager().findFragmentByTag("android:switcher:" + R.id.history_pager + ":" + tab.getPosition());
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                ft.detach(historyFavoritesFragment);
+                ft.attach(historyFavoritesFragment);
+                ft.commit();
             }
 
             @Override
@@ -70,5 +74,12 @@ public class HistoryFragment extends Fragment {
 
     public ToolBarHistory getToolBar() {
         return toolBar;
+    }
+
+    public void loadCurrentHistory() {
+        HistoryFavoritesFragment historyFavoritesFragment = (HistoryFavoritesFragment) getChildFragmentManager().findFragmentByTag("android:switcher:" + R.id.history_pager + ":" + 0);
+        historyFavoritesFragment.reload();
+        historyFavoritesFragment = (HistoryFavoritesFragment) getChildFragmentManager().findFragmentByTag("android:switcher:" + R.id.history_pager + ":" + 1);
+        historyFavoritesFragment.reload();
     }
 }

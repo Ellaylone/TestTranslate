@@ -14,7 +14,7 @@ import com.example.ellaylone.testtranslate.db.DbProvider;
  */
 
 public class TranslateApp extends Application {
-    final int DATABASE_VERSION = 10;
+    final int DATABASE_VERSION = 2;
     private SQLiteDatabase db;
     private TranslationItem currentHistory;
     private int currentHistoryId = 0;
