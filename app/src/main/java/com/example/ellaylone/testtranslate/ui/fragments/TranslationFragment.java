@@ -219,6 +219,7 @@ public class TranslationFragment extends Fragment {
             }
         });
 
+        translateApp = (TranslateApp) ((MainActivity) getActivity()).getApplicationContext();
 
         if (savedInstanceState != null) {
             restoreLangs(savedInstanceState);
@@ -230,32 +231,36 @@ public class TranslationFragment extends Fragment {
             setupSwitch();
             displayTranslation();
         } else {
-            translateApp = (TranslateApp) ((MainActivity) getActivity()).getApplicationContext();
-            currentHistory = translateApp.getCurrentHistory();
-            isCurrentHistoryLoaded = translateApp.isCurrentHistoryLoaded();
-
-            if (currentHistory != null) {
-                if(!isCurrentHistoryLoaded) {
-                    activeSourceLang = currentHistory.getSourceLang();
-                    activeTargetLang = currentHistory.getTargetLang();
-                    translateApp.setCurrentHistoryLoaded(true);
-                } else {
-                    updateActiveLangs();
-                }
-                sourceText.setText(currentHistory.getSourceText());
-                if(!activeSourceLang.equals(currentHistory.getSourceLang()) || !activeTargetLang.equals(currentHistory.getTargetLang())){
-                    List<String> list = new ArrayList<String>();
-                    list.add(currentHistory.getTargetText());
-                    translatedText = list;
-                    displayTranslation();
-                }
-            } else {
-                updateActiveLangs();
-            }
+            loadCurrentHistory();
             updateLangs();
         }
 
         return view;
+    }
+
+    public void loadCurrentHistory() {
+        currentHistory = translateApp.getCurrentHistory();
+        isCurrentHistoryLoaded = translateApp.isCurrentHistoryLoaded();
+        if (currentHistory != null) {
+            if(!isCurrentHistoryLoaded) {
+                activeSourceLang = currentHistory.getSourceLang();
+                activeTargetLang = currentHistory.getTargetLang();
+                translateApp.setCurrentHistoryLoaded(true);
+            } else {
+                updateActiveLangs();
+            }
+
+            sourceText.setText(currentHistory.getSourceText());
+//
+//            if(!activeSourceLang.equals(currentHistory.getSourceLang()) || !activeTargetLang.equals(currentHistory.getTargetLang())){
+//                List<String> list = new ArrayList<String>();
+//                list.add(currentHistory.getTargetText());
+//                translatedText = list;
+//                displayTranslation();
+//            }
+        } else {
+            updateActiveLangs();
+        }
     }
 
     private void setupTranslationResults() {

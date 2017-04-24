@@ -14,6 +14,7 @@ import com.example.ellaylone.testtranslate.R;
 import com.example.ellaylone.testtranslate.TranslateApp;
 import com.example.ellaylone.testtranslate.TranslationItem;
 import com.example.ellaylone.testtranslate.adapters.CategoryAdapter;
+import com.example.ellaylone.testtranslate.ui.fragments.TranslationFragment;
 import com.example.ellaylone.testtranslate.viewPager.SwipeViewPager;
 
 import java.util.ArrayList;
@@ -93,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 catchFocus();
+                if(tab.getPosition() == 0) {
+                    TranslationFragment frag = (TranslationFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + tab.getPosition());
+frag.loadCurrentHistory();
+                }
+//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.detach(frag);
+//                ft.attach(frag);
+//                ft.commit();
             }
 
             @Override

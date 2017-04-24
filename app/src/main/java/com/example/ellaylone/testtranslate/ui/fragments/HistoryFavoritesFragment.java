@@ -38,6 +38,7 @@ public class HistoryFavoritesFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.history_list, container, false);
 
+
         listView = (ListView) rootView.findViewById(R.id.list);
 
         db = ((MainActivity) getActivity()).getDb();
@@ -95,6 +96,7 @@ public class HistoryFavoritesFragment extends Fragment {
                     translateApp.setCurrentHistoryId(Integer.parseInt(historyId.getText().toString()));
 
                     translateApp.updateHistory();
+                    translateApp.setCurrentHistoryLoaded(false);
 
                     mainActivity.moveToTranslation();
                 }
