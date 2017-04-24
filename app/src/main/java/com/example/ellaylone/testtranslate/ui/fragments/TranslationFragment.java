@@ -74,6 +74,7 @@ public class TranslationFragment extends Fragment {
     private List<String> translatedText;
 
     TranslateApp translateApp;
+    private TranslationItem prevHistory;
     private TranslationItem currentHistory;
     private boolean isCurrentHistoryLoaded;
 
@@ -315,7 +316,7 @@ public class TranslationFragment extends Fragment {
                     Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + currentHistory.getId(), null, null, null, null);
 
                     currentHistory.setFavourite(!currentHistory.isFavourite());
-                    
+
                     if (c.getCount() > 0) {
                         c.moveToFirst();
 
@@ -325,6 +326,8 @@ public class TranslationFragment extends Fragment {
                         String where = "_id=" + currentHistory.getId();
 
                         db.update(DbProvider.HISTORY_TABLE_NAME, updatedValues, where, null);
+
+                        displayTranslation();
                     }
                 }
             });
@@ -510,6 +513,7 @@ public class TranslationFragment extends Fragment {
                     !currentHistory.getSourceText().equals(sourceText.getText().toString()) ||
                     !currentHistory.getSourceLang().equals(activeSourceLang) ||
                     !currentHistory.getTargetLang().equals(activeTargetLang)) {
+
                 currentHistory = new TranslationItem(
                         sourceText.getText().toString(),
                         translatedText.get(0),
@@ -519,16 +523,44 @@ public class TranslationFragment extends Fragment {
                         0
                 );
 
-                ContentValues newValues = new ContentValues();
+                Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
 
-                newValues.put("SOURCE_TEXT", currentHistory.getSourceText());
-                newValues.put("TRANSLATED_TEXT", currentHistory.getTargetText());
-                newValues.put("LANG_CODE_SOURCE", currentHistory.getSourceLang());
-                newValues.put("LANG_CODE_TRANSLATION", currentHistory.getTargetLang());
+                boolean insert = false;
 
-                db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
+                if (c.getCount() > 0) {
+                    c.moveToFirst();
+                    prevHistory = new TranslationItem(
+                            c.getString(c.getColumnIndex("SOURCE_TEXT")),
+                            c.getString(c.getColumnIndex("TRANSLATED_TEXT")),
+                            c.getString(c.getColumnIndex("LANG_CODE_SOURCE")),
+                            c.getString(c.getColumnIndex("LANG_CODE_TRANSLATION")),
+                            c.getInt(c.getColumnIndex("_id")),
+                            c.getInt(c.getColumnIndex("IS_FAV"))
+                    );
+                    c.close();
 
-                newValues.clear();
+                    if(!prevHistory.getSourceText().equals(currentHistory.getSourceText()) ||
+                            !prevHistory.getTargetText().equals(currentHistory.getTargetText()) ||
+                            !prevHistory.getSourceLang().equals(currentHistory.getSourceLang()) ||
+                            !prevHistory.getTargetLang().equals(currentHistory.getTargetLang())) {
+                        insert = true;
+                    }
+                } else {
+                    insert = true;
+                }
+
+                if(insert) {
+                    ContentValues newValues = new ContentValues();
+
+                    newValues.put("SOURCE_TEXT", currentHistory.getSourceText());
+                    newValues.put("TRANSLATED_TEXT", currentHistory.getTargetText());
+                    newValues.put("LANG_CODE_SOURCE", currentHistory.getSourceLang());
+                    newValues.put("LANG_CODE_TRANSLATION", currentHistory.getTargetLang());
+
+                    db.insert(DbProvider.HISTORY_TABLE_NAME, null, newValues);
+
+                    newValues.clear();
+                }
             }
         }
     }

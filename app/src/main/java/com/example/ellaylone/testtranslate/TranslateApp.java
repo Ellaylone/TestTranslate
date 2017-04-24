@@ -1,6 +1,7 @@
 package com.example.ellaylone.testtranslate;
 
 import android.app.Application;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -23,12 +24,15 @@ public class TranslateApp extends Application {
         super.onCreate();
 
         setupDb();
-
-        getHistory();
     }
 
     public SQLiteDatabase getDb() {
         return db;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void setupDb() {
@@ -40,7 +44,7 @@ public class TranslateApp extends Application {
         }
     }
 
-    private void getHistory() {
+    public void updateHistory() {
         Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, null, null, null, null, "_id DESC", "1");
 
         if (c.getCount() > 0) {

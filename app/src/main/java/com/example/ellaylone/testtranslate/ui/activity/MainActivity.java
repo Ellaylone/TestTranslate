@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        db = ((TranslateApp) getApplicationContext()).getDb();
+        TranslateApp translateApp = (TranslateApp) getApplicationContext();
+
+        db = translateApp.getDb();
+        translateApp.updateHistory();
 
         setContentView(R.layout.activity_main);
 
