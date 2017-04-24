@@ -316,9 +316,7 @@ public class TranslationFragment extends Fragment {
             addFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(currentHistory == null) {
-                        writeHistory();
-                    }
+                    writeHistory();
                     Cursor c = db.query(DbProvider.HISTORY_TABLE_NAME, null, "_id=" + currentHistory.getId(), null, null, null, null);
 
                     currentHistory.setFavourite(!currentHistory.isFavourite());
@@ -572,11 +570,15 @@ public class TranslationFragment extends Fragment {
 
                     newValues.clear();
 
+                    int id = 0;
+
                     if(prevHistory != null) {
-                        currentHistory.setId(prevHistory.getId() + 1);
-                    } else {
-                        currentHistory.setId(1);
+                        id = prevHistory.getId() + 1;
                     }
+
+                    translateApp.setCurrentHistoryId(id);
+                    translateApp.updateHistory();
+                    currentHistory = translateApp.getCurrentHistory();
                 }
             }
         }
